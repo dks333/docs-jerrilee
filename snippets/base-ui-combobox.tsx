@@ -1,6 +1,7 @@
 import { Combobox } from "@base-ui/react/combobox";
 import { useState } from "react";
 
+import { DemoIcon } from "./demo-icons.tsx";
 import "./base-ui-example.css";
 
 const labels = ["Design", "Documentation", "Engineering", "Feedback", "Research", "Writing"];
@@ -28,7 +29,7 @@ export function BaseUiCombobox() {
                       className="base-ui-chip-remove"
                       aria-label={`Remove ${label}`}
                     >
-                      ×
+                      <DemoIcon name="close" />
                     </Combobox.ChipRemove>
                   </Combobox.Chip>
                 ))}
@@ -41,7 +42,7 @@ export function BaseUiCombobox() {
             )}
           </Combobox.Value>
           <Combobox.Trigger className="base-ui-combobox-trigger" aria-label="Show labels">
-            ⌄
+            <DemoIcon name="chevron-down" />
           </Combobox.Trigger>
         </Combobox.InputGroup>
         <Combobox.Portal>
@@ -54,7 +55,7 @@ export function BaseUiCombobox() {
                 {(label: string) => (
                   <Combobox.Item key={label} value={label} className="base-ui-option">
                     <Combobox.ItemIndicator className="base-ui-item-indicator">
-                      ✓
+                      <DemoIcon name="check" />
                     </Combobox.ItemIndicator>
                     {label}
                   </Combobox.Item>
@@ -65,7 +66,7 @@ export function BaseUiCombobox() {
         </Combobox.Portal>
       </Combobox.Root>
       <p className="base-ui-helper" role="status">
-        {selected.length} labels selected. Add or remove labels without closing the list.
+        {selected.length} labels selected.
       </p>
     </div>
   );

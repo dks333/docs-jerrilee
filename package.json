@@ -7,7 +7,7 @@
     "dev": "MINTLIFY_NATIVE_NPM_PACKAGES=1 mint dev --port 3344 --no-open",
     "type": "tsc --noEmit",
     "lint": "oxlint snippets",
-    "format": "oxfmt snippets package.json tsconfig.json docs.json"
+    "format": "oxfmt snippets package.json tsconfig.json docs.json styles.css"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",

@@ -74,7 +74,7 @@ function DocumentEditor({ variant }: { variant: TiptapVariant }) {
       </div>
       <div className="tiptap-example-footer">
         <span>Type / for blocks</span>
-        <span>Changes stay in this example</span>
+        <span>Changes aren’t saved</span>
       </div>
       {editor && slashMenu && (
         <div className="tiptap-slash-menu" style={{ left: slashMenu.left, top: slashMenu.top }}>

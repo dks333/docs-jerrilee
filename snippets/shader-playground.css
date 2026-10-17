@@ -1,54 +1,18 @@
 .shader-example {
-  --example-background: var(--demo-surface);
-  --example-border: var(--demo-border);
-  --example-text: var(--demo-text);
-  --example-muted: var(--demo-muted);
-  --example-accent: var(--demo-accent);
-  color: var(--example-text);
+  container: shader-example / inline-size;
+  color: var(--demo-text);
   font-family: inherit;
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 20px;
 }
 html.dark .shader-example {
   color-scheme: dark;
 }
-
 .shader-example *,
 .shader-example *::before,
 .shader-example *::after {
   box-sizing: border-box;
 }
-
-.shader-example button,
-.shader-example select,
-.shader-example input {
-  font-family: inherit;
-}
-
-.shader-example button,
-.shader-example select {
-  min-height: 30px;
-  border: 1px solid var(--example-border);
-  border-radius: 5px;
-  background: transparent;
-  color: var(--example-text);
-  font-size: 12px;
-}
-
-.shader-example button {
-  padding: 4px 11px;
-  cursor: pointer;
-}
-.shader-example button:hover {
-  background: var(--example-background);
-}
-.shader-example button:focus-visible,
-.shader-example input:focus-visible,
-.shader-example select:focus-visible {
-  outline: 2px solid var(--example-accent);
-  outline-offset: 3px;
-}
-
 .shader-example-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 200px;
@@ -56,10 +20,10 @@ html.dark .shader-example {
   align-items: start;
 }
 .shader-example-preview {
-  height: 380px;
+  height: 360px;
   overflow: hidden;
-  border: 1px solid var(--example-border);
-  border-radius: 6px;
+  border-radius: 8px;
+  box-shadow: var(--demo-shadow-weak);
 }
 .shader-example-preview > div {
   width: 100%;
@@ -77,78 +41,106 @@ html.dark .shader-example {
 }
 .shader-example-settings legend {
   padding: 0;
-  margin-bottom: 16px;
-  font-size: 13px;
+  margin-block-end: 16px;
+  color: var(--demo-strong);
+  font-size: 14px;
   font-weight: 500;
 }
 .shader-palette-field {
   display: grid;
-  grid-template-columns: 1fr 112px;
-  gap: 10px;
+  grid-template-columns: 1fr 120px;
+  gap: 12px;
   align-items: center;
-  margin-bottom: 18px;
-  font-size: 12px;
+  margin-block-end: 20px;
+  font-size: 13px;
 }
-.shader-palette-field select {
-  min-width: 0;
+.shader-palette-field .demo-select-wrap {
   width: 100%;
-  padding: 4px 7px;
 }
 .shader-example-ranges {
   display: grid;
-  gap: 14px;
+  gap: 16px;
 }
 .shader-control-label {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
-  margin-bottom: 5px;
-  font-size: 12px;
+  margin-block-end: 4px;
+  font-size: 13px;
 }
 .shader-control output {
-  color: var(--example-muted);
-  font-size: 11px;
+  color: var(--demo-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 .shader-control input {
   display: block;
+  appearance: none;
   width: 100%;
-  height: 15px;
+  height: 20px;
   margin: 0;
-  accent-color: var(--example-accent);
-  cursor: ew-resize;
+  background: transparent;
+  cursor: default;
+}
+.shader-control input::-webkit-slider-runnable-track {
+  height: 3px;
+  background: var(--demo-border);
+  border-radius: 2px;
+}
+.shader-control input::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin-block-start: -4.5px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--demo-solid);
+}
+.shader-control input::-moz-range-track {
+  height: 3px;
+  background: var(--demo-border);
+  border-radius: 2px;
+}
+.shader-control input::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--demo-solid);
+}
+.shader-control input:focus-visible {
+  outline: 2px solid var(--demo-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 .shader-example-actions {
   display: flex;
-  gap: 8px;
-  margin-top: 20px;
+  gap: 6px;
+  margin-block-start: 20px;
 }
-@media (max-width: 1100px) {
+@container shader-example (max-width: 640px) {
   .shader-example-layout {
     grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
   .shader-example-preview {
-    height: 340px;
-  }
-  .shader-example-settings {
-    width: 100%;
+    height: 300px;
   }
   .shader-palette-field {
-    max-width: 240px;
+    max-width: 260px;
   }
   .shader-example-ranges {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px 28px;
+    gap: 16px 24px;
   }
 }
-
-@media (max-width: 480px) {
+@container shader-example (max-width: 360px) {
   .shader-example-preview {
-    height: 280px;
+    height: 260px;
   }
   .shader-example-ranges {
-    column-gap: 20px;
+    column-gap: 16px;
   }
 }

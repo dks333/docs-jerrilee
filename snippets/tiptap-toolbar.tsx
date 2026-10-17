@@ -2,6 +2,7 @@ import type { Editor } from "@tiptap/react";
 import { useEditorState } from "@tiptap/react";
 import { BubbleMenu } from "@tiptap/react/menus";
 import type { TiptapVariant } from "./tiptap-content.ts";
+import { DemoIcon } from "./demo-icons.tsx";
 
 interface ToolbarState {
   block: string;
@@ -50,50 +51,58 @@ function Toolbar({
 }) {
   return (
     <div className="tiptap-example-toolbar" role="group" aria-label="Text formatting">
-      <select
-        aria-label="Block type"
-        value={state.block}
-        disabled={!editor}
-        onChange={(event) => {
-          if (editor) setBlock(editor, event.target.value);
-        }}
-      >
-        <option value="paragraph">Text</option>
-        <option value="heading-1">Heading 1</option>
-        <option value="heading-2">Heading 2</option>
-        <option value="heading-3">Heading 3</option>
-      </select>
+      <div className="tiptap-block-select">
+        <select
+          className="demo-select"
+          aria-label="Block type"
+          value={state.block}
+          disabled={!editor}
+          onChange={(event) => {
+            if (editor) setBlock(editor, event.target.value);
+          }}
+        >
+          <option value="paragraph">Text</option>
+          <option value="heading-1">Heading 1</option>
+          <option value="heading-2">Heading 2</option>
+          <option value="heading-3">Heading 3</option>
+        </select>
+        <DemoIcon name="chevron-down" />
+      </div>
       <span className="tiptap-toolbar-separator" aria-hidden="true" />
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost demo-button-square"
         aria-label="Bold"
         aria-pressed={state.bold}
         disabled={!editor}
         onClick={() => editor?.chain().focus().toggleBold().run()}
       >
-        <strong>B</strong>
+        <DemoIcon name="bold" />
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost demo-button-square"
         aria-label="Italic"
         aria-pressed={state.italic}
         disabled={!editor}
         onClick={() => editor?.chain().focus().toggleItalic().run()}
       >
-        <em>I</em>
+        <DemoIcon name="italic" />
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost demo-button-square"
         aria-label="Inline code"
         aria-pressed={state.code}
         disabled={!editor}
         onClick={() => editor?.chain().focus().toggleCode().run()}
       >
-        &lt;/&gt;
+        <DemoIcon name="code" />
       </button>
       {variant === "tasks" && (
         <button
           type="button"
+          className="demo-button demo-button-small demo-button-ghost"
           aria-label="To-do list"
           aria-pressed={state.tasks}
           disabled={!editor}
@@ -105,17 +114,21 @@ function Toolbar({
       <span className="tiptap-toolbar-spacer" />
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost demo-button-square"
+        aria-label="Undo"
         disabled={!state.canUndo}
         onClick={() => editor?.chain().focus().undo().run()}
       >
-        Undo
+        <DemoIcon name="undo" />
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost demo-button-square"
+        aria-label="Redo"
         disabled={!state.canRedo}
         onClick={() => editor?.chain().focus().redo().run()}
       >
-        Redo
+        <DemoIcon name="redo" />
       </button>
     </div>
   );
@@ -135,6 +148,7 @@ function TableControls({ editor, active }: { editor: Editor | null; active: bool
     <div className="tiptap-table-controls" role="group" aria-label="Table controls">
       <button
         type="button"
+        className="demo-button demo-button-small"
         disabled={!editor || active}
         onClick={() =>
           editor?.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()
@@ -144,6 +158,7 @@ function TableControls({ editor, active }: { editor: Editor | null; active: bool
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost"
         disabled={!active}
         onClick={() => editor?.chain().focus().addRowAfter().run()}
       >
@@ -151,6 +166,7 @@ function TableControls({ editor, active }: { editor: Editor | null; active: bool
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost"
         disabled={!active}
         onClick={() => editor?.chain().focus().addColumnAfter().run()}
       >
@@ -158,6 +174,7 @@ function TableControls({ editor, active }: { editor: Editor | null; active: bool
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost"
         disabled={!active}
         onClick={() => editor?.chain().focus().deleteRow().run()}
       >
@@ -165,6 +182,7 @@ function TableControls({ editor, active }: { editor: Editor | null; active: bool
       </button>
       <button
         type="button"
+        className="demo-button demo-button-small demo-button-ghost"
         disabled={!active}
         onClick={() => editor?.chain().focus().deleteTable().run()}
       >
@@ -196,27 +214,30 @@ export function EditorToolbar({ editor, variant }: { editor: Editor; variant: Ti
         <div className="tiptap-bubble-menu" role="group" aria-label="Selection formatting">
           <button
             type="button"
+            className="demo-button demo-button-small demo-button-ghost demo-button-square"
             aria-label="Bold selection"
             aria-pressed={state.bold}
             onClick={() => editor.chain().focus().toggleBold().run()}
           >
-            <strong>B</strong>
+            <DemoIcon name="bold" />
           </button>
           <button
             type="button"
+            className="demo-button demo-button-small demo-button-ghost demo-button-square"
             aria-label="Italic selection"
             aria-pressed={state.italic}
             onClick={() => editor.chain().focus().toggleItalic().run()}
           >
-            <em>I</em>
+            <DemoIcon name="italic" />
           </button>
           <button
             type="button"
+            className="demo-button demo-button-small demo-button-ghost demo-button-square"
             aria-label="Code selection"
             aria-pressed={state.code}
             onClick={() => editor.chain().focus().toggleCode().run()}
           >
-            &lt;/&gt;
+            <DemoIcon name="code" />
           </button>
         </div>
       </BubbleMenu>

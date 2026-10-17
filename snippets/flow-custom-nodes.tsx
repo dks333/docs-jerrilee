@@ -10,6 +10,7 @@ import {
   useNodesState,
 } from "@xyflow/react";
 import type { Connection, Node, NodeProps } from "@xyflow/react";
+import { DemoIcon } from "./demo-icons.tsx";
 import "@xyflow/react/dist/style.css";
 import "./flow-example.css";
 
@@ -26,7 +27,7 @@ function BudgetCard({ data }: NodeProps<BudgetNode>) {
         <label>
           <span className="flow-sr-only">Monthly budget in dollars</span>
           <input
-            className="nodrag"
+            className="nodrag demo-input"
             type="number"
             min={0}
             max={100000}
@@ -103,11 +104,13 @@ export function FlowCustomNodes() {
         <span>Data flows through the connection</span>
         <button
           type="button"
+          className="demo-button demo-button-small"
           onClick={() => {
             setNodes(initialNodes);
             setEdges(initialEdges);
           }}
         >
+          <DemoIcon name="reset" />
           Reset diagram
         </button>
       </div>

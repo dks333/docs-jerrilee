@@ -1,4 +1,5 @@
 import { numberFormatter } from "./recharts-data.ts";
+import { DemoIcon } from "./demo-icons.tsx";
 
 export function ChartDataTable({
   caption,
@@ -11,7 +12,12 @@ export function ChartDataTable({
 }) {
   return (
     <details className="recharts-example-data">
-      <summary>View data</summary>
+      <summary className="demo-button demo-button-small demo-button-ghost">
+        <span className="recharts-data-chevron">
+          <DemoIcon name="chevron-right" />
+        </span>
+        View data
+      </summary>
       <div className="recharts-example-table">
         <table>
           <caption>{caption}</caption>

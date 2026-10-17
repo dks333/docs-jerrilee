@@ -1,27 +1,28 @@
 import { Menu } from "@base-ui/react/menu";
 import { useState } from "react";
 
+import { DemoIcon } from "./demo-icons.tsx";
 import "./base-ui-example.css";
 
-const notes = [
-  { title: "A slower start", date: "October 14", category: "Notes" },
-  { title: "Things worth keeping", date: "October 10", category: "Collection" },
-  { title: "Out of the office", date: "October 7", category: "Journal" },
+const files = [
+  { title: "quickstart.mdx", date: "October 14", category: "Guide" },
+  { title: "authentication.mdx", date: "October 10", category: "Reference" },
+  { title: "changelog.mdx", date: "October 7", category: "Updates" },
 ];
 
 export function BaseUiMenu() {
   const [compact, setCompact] = useState(false);
   const [showCategory, setShowCategory] = useState(true);
   const [sort, setSort] = useState("newest");
-  const visibleNotes = sort === "newest" ? notes : [...notes].reverse();
+  const visibleFiles = sort === "newest" ? files : [...files].reverse();
 
   return (
     <div className="base-ui-example">
       <div className="base-ui-demo-heading">
-        <strong>Reading list</strong>
+        <strong>Documentation</strong>
         <Menu.Root>
-          <Menu.Trigger className="base-ui-example-button">
-            View options <span aria-hidden="true">⌄</span>
+          <Menu.Trigger className="demo-button">
+            View options <DemoIcon name="chevron-down" />
           </Menu.Trigger>
           <Menu.Portal>
             <Menu.Positioner className="base-ui-positioner" sideOffset={6} align="end">
@@ -34,7 +35,7 @@ export function BaseUiMenu() {
                     onCheckedChange={setCompact}
                   >
                     <Menu.CheckboxItemIndicator className="base-ui-item-indicator">
-                      ✓
+                      <DemoIcon name="check" />
                     </Menu.CheckboxItemIndicator>
                     Compact spacing
                   </Menu.CheckboxItem>
@@ -44,7 +45,7 @@ export function BaseUiMenu() {
                     onCheckedChange={setShowCategory}
                   >
                     <Menu.CheckboxItemIndicator className="base-ui-item-indicator">
-                      ✓
+                      <DemoIcon name="check" />
                     </Menu.CheckboxItemIndicator>
                     Show category
                   </Menu.CheckboxItem>
@@ -52,7 +53,7 @@ export function BaseUiMenu() {
                 <Menu.Separator className="base-ui-menu-separator" />
                 <Menu.SubmenuRoot>
                   <Menu.SubmenuTrigger className="base-ui-option base-ui-submenu-trigger">
-                    Sort by <span aria-hidden="true">›</span>
+                    Sort by <DemoIcon name="chevron-right" />
                   </Menu.SubmenuTrigger>
                   <Menu.Portal>
                     <Menu.Positioner className="base-ui-positioner" sideOffset={4} alignOffset={-4}>
@@ -60,13 +61,13 @@ export function BaseUiMenu() {
                         <Menu.RadioGroup value={sort} onValueChange={setSort}>
                           <Menu.RadioItem className="base-ui-option" value="newest">
                             <Menu.RadioItemIndicator className="base-ui-item-indicator">
-                              •
+                              <DemoIcon name="check" />
                             </Menu.RadioItemIndicator>
                             Newest first
                           </Menu.RadioItem>
                           <Menu.RadioItem className="base-ui-option" value="oldest">
                             <Menu.RadioItemIndicator className="base-ui-item-indicator">
-                              •
+                              <DemoIcon name="check" />
                             </Menu.RadioItemIndicator>
                             Oldest first
                           </Menu.RadioItem>
@@ -81,13 +82,13 @@ export function BaseUiMenu() {
         </Menu.Root>
       </div>
       <div className="base-ui-reading-list" data-compact={compact}>
-        {visibleNotes.map((note) => (
-          <div className="base-ui-reading-row" key={note.title}>
+        {visibleFiles.map((file) => (
+          <div className="base-ui-reading-row" key={file.title}>
             <div>
-              <strong>{note.title}</strong>
-              {showCategory && <span>{note.category}</span>}
+              <strong>{file.title}</strong>
+              {showCategory && <span>{file.category}</span>}
             </div>
-            <time>{note.date}</time>
+            <time>{file.date}</time>
           </div>
         ))}
       </div>

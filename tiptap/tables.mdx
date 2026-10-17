@@ -1,6 +1,6 @@
 ---
 title: "Tables"
-description: "Edit a small collection, then give it another row or column."
+description: "Edit table cells, rows, and columns."
 keywords: ["Tiptap", "table", "TableKit", "React"]
 ---
 
@@ -34,6 +34,7 @@ export function TableEditor() {
     <>
       <button
         type="button"
+        className="demo-button demo-button-small"
         disabled={!editor}
         onClick={() => editor?.chain().focus().insertTable({
           rows: 3,

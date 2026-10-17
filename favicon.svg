@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <title>Package imports</title>
+  <rect width="32" height="32" rx="8" fill="#3E6553"/>
+  <path d="m16 7 9 5v9l-9 5-9-5v-9l9-5Z" stroke="#FBFAF7" stroke-width="1.7" stroke-linejoin="round"/>
+  <path d="m7 12 9 5 9-5m-9 5v9M11.5 9.5l9 5" stroke="#FBFAF7" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

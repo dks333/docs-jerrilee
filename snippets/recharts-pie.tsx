@@ -68,6 +68,7 @@ export function RechartsPie() {
           {sourceData.map((source, index) => (
             <button
               key={source.name}
+              className="demo-button demo-button-ghost recharts-source-button"
               type="button"
               aria-pressed={index === selectedIndex}
               onClick={() => setSelectedIndex(index)}

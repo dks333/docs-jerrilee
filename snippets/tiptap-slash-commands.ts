@@ -15,7 +15,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "text",
     title: "Text",
-    description: "Just start writing",
+    description: "Plain paragraph",
     keywords: "paragraph plain",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).setParagraph().run();
@@ -24,7 +24,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "heading-1",
     title: "Heading 1",
-    description: "A large heading",
+    description: "Large section heading",
     keywords: "title h1",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).setHeading({ level: 1 }).run();
@@ -33,7 +33,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "heading-2",
     title: "Heading 2",
-    description: "A medium heading",
+    description: "Medium section heading",
     keywords: "subtitle h2",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).setHeading({ level: 2 }).run();
@@ -42,7 +42,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "heading-3",
     title: "Heading 3",
-    description: "A small heading",
+    description: "Small section heading",
     keywords: "subtitle h3",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).setHeading({ level: 3 }).run();
@@ -51,7 +51,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "bullet-list",
     title: "Bullet list",
-    description: "A simple collection",
+    description: "Unordered list",
     keywords: "unordered bullets",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).toggleBulletList().run();
@@ -60,7 +60,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "numbered-list",
     title: "Numbered list",
-    description: "One thing after another",
+    description: "Ordered list",
     keywords: "ordered numbers",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).toggleOrderedList().run();
@@ -69,7 +69,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "to-do",
     title: "To-do list",
-    description: "Keep track of a few tasks",
+    description: "Checklist with checkboxes",
     keywords: "task checkbox todo",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).toggleTaskList().run();
@@ -78,7 +78,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "quote",
     title: "Quote",
-    description: "Something worth keeping",
+    description: "Blockquote",
     keywords: "blockquote",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).toggleBlockquote().run();
@@ -87,7 +87,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "code",
     title: "Code block",
-    description: "A place for your code",
+    description: "Code without formatting",
     keywords: "snippet pre",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).toggleCodeBlock().run();
@@ -96,7 +96,7 @@ export const SLASH_COMMANDS: SlashCommand[] = [
   {
     id: "divider",
     title: "Divider",
-    description: "A little breathing room",
+    description: "Horizontal line",
     keywords: "horizontal rule line",
     run: (editor, range) => {
       editor.chain().focus().deleteRange(range).setHorizontalRule().run();
@@ -178,7 +178,7 @@ export function createSlashCommands(
           query,
           commands,
           selectedIndex,
-          left: Math.max(12, Math.min(coordinates.left - bounds.left, bounds.width - 272)),
+          left: Math.max(12, Math.min(coordinates.left - bounds.left, bounds.width - 292)),
           top: coordinates.bottom - bounds.top + 8,
         });
         view.dom.setAttribute("aria-controls", listboxId);

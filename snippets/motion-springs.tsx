@@ -1,6 +1,7 @@
 import { MotionConfig, motion, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
 
+import { DemoIcon } from "./demo-icons.tsx";
 import "./motion-examples.css";
 
 export function MotionSprings() {
@@ -65,13 +66,13 @@ export function MotionSprings() {
           </label>
         </div>
         <div className="motion-example-actions">
-          <button type="button" className="motion-example-button" onClick={() => setMoved(!moved)}>
-            Move {moved ? "left" : "right"} <span aria-hidden="true">↔</span>
+          <button type="button" className="demo-button" onClick={() => setMoved(!moved)}>
+            Move {moved ? "left" : "right"} <DemoIcon name="play" />
           </button>
           <p>
             {reducedMotion
               ? "Reduced motion is enabled. Position changes instantly."
-              : "Try low damping for a softer bounce."}
+              : "Changes apply on the next move."}
           </p>
         </div>
       </div>

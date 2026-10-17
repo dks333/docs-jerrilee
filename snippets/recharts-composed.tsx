@@ -73,7 +73,7 @@ export function RechartsComposed() {
             <Legend
               iconType="plainline"
               iconSize={14}
-              wrapperStyle={{ fontSize: 12, paddingTop: 8 }}
+              wrapperStyle={{ fontSize: 13, paddingTop: 8 }}
             />
             <Bar
               yAxisId="requests"

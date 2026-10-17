@@ -26,7 +26,7 @@ Open http://localhost:3344/tiptap/editor.
 
 ## Design
 
-Luma, Inter, warm paper (#FBFAF7), charcoal (#151917), and muted forest (#3E6553). Shell configuration lives in docs.json; styles.css defines shared example tokens. Each component has scoped CSS. No global custom JavaScript is needed.
+Luma, Inter, warm paper (#FBFAF7), charcoal (#151917), and muted forest (#3E6553). Shell configuration lives in docs.json. The snippets use a neutral UI inspired by Mentha: 32px controls, 6px control corners, 8px surfaces, subtle borders, and flat rows. styles.css defines shared tokens and controls; demo-icons.tsx provides consistent SVG icons. Mentha is a restricted package and is not a dependency of this public showcase. Each component has scoped CSS; no global custom JavaScript is needed. A matching package favicon lives in favicon.svg.
 
 React Flow and Motion add editable graphs and spatial animation to the original four packages. Official sources: https://reactflow.dev/learn/advanced-use/ssr-ssg-configuration and https://motion.dev/docs/react-accessibility.
 

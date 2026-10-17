@@ -1,10 +1,12 @@
 .flow-example {
+  container: flow-example / inline-size;
   color: var(--demo-text);
-  border: 1px solid var(--demo-border);
   border-radius: 8px;
+  box-shadow: var(--demo-shadow-weak);
   overflow: hidden;
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
 }
 .flow-example * {
   box-sizing: border-box;
@@ -13,65 +15,57 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--demo-border);
-  background: var(--demo-surface);
+  gap: 12px;
+  padding: 12px 16px;
+  border-block-end: 1px solid var(--demo-border);
+  background: var(--demo-background);
 }
-.flow-toolbar span,
+.flow-toolbar > span,
 .flow-caption {
   color: var(--demo-muted);
-}
-.flow-example button,
-.flow-example select,
-.flow-example input {
-  font: inherit;
-  color: var(--demo-text);
-  background: var(--demo-background);
-  border: 1px solid var(--demo-border);
-  border-radius: 5px;
-  padding: 7px 10px;
-}
-.flow-example button {
-  cursor: pointer;
-}
-.flow-example button:focus-visible,
-.flow-example input:focus-visible,
-.flow-example select:focus-visible {
-  outline: 2px solid var(--demo-accent);
-  outline-offset: 3px;
+  font-size: 13px;
+  line-height: 20px;
 }
 .flow-canvas {
-  height: 430px;
+  height: 400px;
   width: 100%;
-  background: var(--demo-background);
+  background: var(--demo-surface);
 }
 .flow-example .react-flow {
-  --xy-background-color: var(--demo-background);
-  --xy-node-background-color: var(--demo-surface);
-  --xy-node-border: 1px solid var(--demo-border);
-  --xy-node-color: var(--demo-text);
-  --xy-node-boxshadow-hover: 0 0 0 1px var(--demo-accent);
+  --xy-background-color: var(--demo-surface);
+  --xy-node-background-color: var(--demo-background);
+  --xy-node-border: none;
+  --xy-node-color: var(--demo-strong);
+  --xy-node-boxshadow-hover: var(--demo-shadow-weak);
   --xy-node-boxshadow-selected: 0 0 0 2px var(--demo-accent);
-  --xy-edge-stroke: var(--demo-accent);
+  --xy-edge-stroke: var(--demo-muted);
   --xy-edge-stroke-width: 1.5;
   --xy-edge-label-color: var(--demo-muted);
-  --xy-edge-label-background-color: var(--demo-background);
-  --xy-handle-background-color: var(--demo-accent);
+  --xy-edge-label-background-color: var(--demo-surface);
+  --xy-handle-background-color: var(--demo-muted);
   --xy-handle-border-color: var(--demo-background);
-  --xy-controls-button-background-color: var(--demo-surface);
+  --xy-controls-button-background-color: var(--demo-raised);
   --xy-controls-button-color: var(--demo-text);
   --xy-controls-button-border-color: var(--demo-border);
-  --xy-attribution-background-color: var(--demo-background);
+  --xy-attribution-background-color: var(--demo-surface);
 }
 .flow-example .react-flow__node-default {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  box-shadow: var(--demo-shadow-weak);
+  font-size: 14px;
+  font-weight: 500;
+}
+.flow-example .react-flow__controls {
   border-radius: 6px;
-  font-size: 13px;
+  overflow: hidden;
+  box-shadow: var(--demo-shadow-weak);
 }
 .flow-example .react-flow__controls-button {
+  width: 28px;
+  height: 28px;
   padding: 6px;
 }
 .flow-example .react-flow__attribution a {
@@ -79,51 +73,61 @@
 }
 .flow-caption {
   margin: 0;
-  border-top: 1px solid var(--demo-border);
-  padding: 14px 18px;
-  font-size: 12px;
+  border-block-start: 1px solid var(--demo-border);
+  padding: 12px 16px;
+  background: var(--demo-background);
 }
 .flow-validation {
   display: flex;
   flex-wrap: wrap;
   align-items: end;
   gap: 12px;
-  padding: 18px;
-  border-top: 1px solid var(--demo-border);
+  padding: 16px;
+  border-block-start: 1px solid var(--demo-border);
+  background: var(--demo-background);
 }
-.flow-validation label {
+.flow-connection-field {
   display: grid;
-  gap: 5px;
+  gap: 6px;
   flex: 1;
   min-width: 120px;
+  font-size: 13px;
+  font-weight: 500;
 }
 .flow-validation p {
   width: 100%;
-  margin: 4px 0 0;
+  margin: 0;
   color: var(--demo-muted);
+  font-size: 13px;
+  font-weight: 400;
 }
 .flow-budget-card {
   display: grid;
-  gap: 12px;
+  gap: 8px;
   height: 100%;
-  padding: 18px;
-  background: var(--demo-surface);
-  border: 1px solid var(--demo-border);
+  padding: 16px;
+  color: var(--demo-strong);
+  background: var(--demo-background);
+  box-shadow: var(--demo-shadow-weak);
   border-radius: 8px;
 }
+.flow-budget-card > span {
+  font-size: 13px;
+  font-weight: 500;
+}
 .flow-budget-card input {
-  width: 100%;
-  font-size: 20px;
-  padding: 4px 8px;
+  font-variant-numeric: tabular-nums;
 }
 .flow-budget-card output {
-  font-size: 28px;
-  font-weight: 550;
-  line-height: 1;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
   font-variant-numeric: tabular-nums;
 }
 .flow-budget-card small {
   color: var(--demo-muted);
+  font-size: 13px;
+  line-height: 20px;
 }
 .flow-sr-only {
   position: absolute;
@@ -134,15 +138,19 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
-@media (max-width: 600px) {
+@container flow-example (max-width: 480px) {
   .flow-canvas {
-    height: 360px;
+    height: 340px;
   }
   .flow-toolbar {
-    align-items: start;
-    font-size: 12px;
+    align-items: center;
+    gap: 8px;
   }
-  .flow-toolbar button {
-    flex-shrink: 0;
+  .flow-toolbar > span {
+    max-width: 150px;
   }
+}
+
+.flow-connection-field .demo-select-wrap {
+  width: 100%;
 }

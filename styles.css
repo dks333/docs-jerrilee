@@ -1,17 +1,149 @@
 :root {
   --content-width: 760px;
-  --demo-background: #fbfaf7;
-  --demo-surface: #f3f2ed;
-  --demo-border: #deded6;
-  --demo-text: #242b27;
-  --demo-muted: #626d65;
+  --demo-background: #ffffff;
+  --demo-surface: #fafafa;
+  --demo-raised: #ffffff;
+  --demo-hover: #f2f2f2;
+  --demo-border: #e5e5e5;
+  --demo-text: #414141;
+  --demo-strong: #171717;
+  --demo-muted: #707070;
   --demo-accent: #3e6553;
+  --demo-solid: #202020;
+  --demo-on-solid: #ffffff;
+  --demo-shadow-weak: 0 0 0 1px var(--demo-border), 0 1px 2px #00000008;
+  --demo-shadow-popup: 0 0 0 1px var(--demo-border), 0 8px 24px #00000018;
 }
 html.dark {
-  --demo-background: #151917;
-  --demo-surface: #1b211e;
-  --demo-border: #343d37;
-  --demo-text: #e7eae5;
-  --demo-muted: #a5b0a7;
+  --demo-background: #191919;
+  --demo-surface: #202020;
+  --demo-raised: #262626;
+  --demo-hover: #2d2d2d;
+  --demo-border: #363636;
+  --demo-text: #cecece;
+  --demo-strong: #f5f5f5;
+  --demo-muted: #a3a3a3;
   --demo-accent: #9ec8b1;
+  --demo-solid: #ededed;
+  --demo-on-solid: #171717;
+}
+.demo-icon {
+  display: block;
+  flex: 0 0 auto;
+}
+.demo-button {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--demo-raised);
+  color: var(--demo-strong);
+  box-shadow: var(--demo-shadow-weak);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+  cursor: default;
+}
+.demo-button:hover:not(:disabled) {
+  background: var(--demo-hover);
+}
+.demo-button-small {
+  min-height: 28px;
+  padding: 4px 8px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.demo-button-ghost {
+  box-shadow: none;
+  background: transparent;
+  color: var(--demo-text);
+}
+.demo-button-primary {
+  background: var(--demo-solid);
+  color: var(--demo-on-solid);
+  box-shadow: 0 1px 2px #00000014;
+}
+.demo-button-primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--demo-solid) 90%, var(--demo-background));
+}
+.demo-button-square {
+  width: 32px;
+  padding-inline: 0;
+}
+.demo-button-square.demo-button-small {
+  width: 28px;
+}
+.demo-button[aria-pressed="true"] {
+  background: var(--demo-hover);
+  color: var(--demo-strong);
+}
+.demo-button:disabled {
+  color: var(--demo-muted);
+  background: var(--demo-surface);
+  box-shadow: none;
+  cursor: default;
+}
+.demo-button-ghost:disabled {
+  background: transparent;
+}
+.demo-button:focus-visible,
+.demo-input:focus-visible,
+.demo-select:focus-visible {
+  outline: 2px solid var(--demo-accent);
+  outline-offset: 3px;
+}
+.demo-input,
+.demo-select {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 32px;
+  width: 100%;
+  padding: 6px 9px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--demo-strong);
+  background: var(--demo-raised);
+  box-shadow: var(--demo-shadow-weak);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 20px;
+}
+.demo-select {
+  appearance: none;
+  padding-inline-end: 30px;
+}
+.demo-select-wrap {
+  position: relative;
+  display: inline-flex;
+  min-width: 0;
+}
+.demo-select-wrap > .demo-icon {
+  position: absolute;
+  inset-inline-end: 8px;
+  inset-block-start: calc(50% - 8px);
+  color: var(--demo-muted);
+  pointer-events: none;
+}
+.demo-input::placeholder {
+  color: var(--demo-muted);
+}
+.demo-input:disabled,
+.demo-select:disabled {
+  color: var(--demo-muted);
+  background: var(--demo-surface);
+  box-shadow: none;
+}
+@media (forced-colors: active) {
+  .demo-button,
+  .demo-input,
+  .demo-select {
+    border: 1px solid ButtonText;
+  }
 }

@@ -9,6 +9,7 @@ import {
 } from "@xyflow/react";
 import type { Connection, Edge, Node } from "@xyflow/react";
 import { connectionError, makeNode, workflowEdges, workflowNodes } from "./flow-data.ts";
+import { DemoIcon } from "./demo-icons.tsx";
 import "@xyflow/react/dist/style.css";
 import "./flow-example.css";
 
@@ -82,7 +83,8 @@ export function FlowExample({ validation = false }: { validation?: boolean }) {
         <span>
           {nodes.length} steps · {edges.length} connections
         </span>
-        <button type="button" onClick={reset}>
+        <button type="button" className="demo-button demo-button-small" onClick={reset}>
+          <DemoIcon name="reset" />
           Reset diagram
         </button>
       </div>
@@ -121,35 +123,43 @@ export function FlowExample({ validation = false }: { validation?: boolean }) {
             });
           }}
         >
-          <label htmlFor={sourceId}>
-            From
-            <select
-              id={sourceId}
-              value={selectedSource}
-              onChange={(event) => setSource(event.currentTarget.value)}
-            >
-              {nodes.map((node) => (
-                <option key={node.id} value={node.id}>
-                  {String(node.data.label)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label htmlFor={targetId}>
-            To
-            <select
-              id={targetId}
-              value={selectedTarget}
-              onChange={(event) => setTarget(event.currentTarget.value)}
-            >
-              {nodes.map((node) => (
-                <option key={node.id} value={node.id}>
-                  {String(node.data.label)}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button type="submit" disabled={nodes.length < 2}>
+          <div className="flow-connection-field">
+            <label htmlFor={sourceId}>From</label>
+            <span className="demo-select-wrap">
+              <select
+                className="demo-select"
+                id={sourceId}
+                value={selectedSource}
+                onChange={(event) => setSource(event.currentTarget.value)}
+              >
+                {nodes.map((node) => (
+                  <option key={node.id} value={node.id}>
+                    {String(node.data.label)}
+                  </option>
+                ))}
+              </select>
+              <DemoIcon name="chevron-down" />
+            </span>
+          </div>
+          <div className="flow-connection-field">
+            <label htmlFor={targetId}>To</label>
+            <span className="demo-select-wrap">
+              <select
+                className="demo-select"
+                id={targetId}
+                value={selectedTarget}
+                onChange={(event) => setTarget(event.currentTarget.value)}
+              >
+                {nodes.map((node) => (
+                  <option key={node.id} value={node.id}>
+                    {String(node.data.label)}
+                  </option>
+                ))}
+              </select>
+              <DemoIcon name="chevron-down" />
+            </span>
+          </div>
+          <button type="submit" className="demo-button" disabled={nodes.length < 2}>
             Add connection
           </button>
           <p role="status">{message}</p>

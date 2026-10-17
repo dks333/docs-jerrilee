@@ -56,6 +56,7 @@ export function SourcesChart() {
       <div aria-label="Traffic sources">
         {data.map((source, index) => (
           <button type="button" key={source.name}
+            className="demo-button demo-button-ghost recharts-source-button"
             aria-pressed={index === selectedIndex}
             onClick={() => setSelectedIndex(index)}>
             {source.name}

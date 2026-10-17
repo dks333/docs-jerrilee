@@ -1,14 +1,10 @@
 import { MotionConfig, Reorder, useDragControls, useReducedMotion } from "motion/react";
 import { useState } from "react";
 
+import { DemoIcon } from "./demo-icons.tsx";
 import "./motion-examples.css";
 
-const initialItems = [
-  "Draft an outline",
-  "Collect references",
-  "Review the examples",
-  "Share the notes",
-];
+const initialItems = ["Introduction", "Installation", "Configuration", "Examples"];
 
 export function MotionReorder() {
   const [items, setItems] = useState(initialItems);
@@ -35,9 +31,9 @@ export function MotionReorder() {
     <MotionConfig reducedMotion="user">
       <div className="motion-example">
         <div className="motion-example-heading">
-          <strong>Before you publish</strong>
+          <strong>Page order</strong>
           <button
-            className="motion-example-reset"
+            className="demo-button demo-button-small demo-button-ghost"
             type="button"
             onClick={() => reorder([...initialItems])}
           >
@@ -49,7 +45,7 @@ export function MotionReorder() {
           axis="y"
           values={items}
           onReorder={reorder}
-          aria-label="Publishing checklist"
+          aria-label="Documentation page order"
           layoutScroll
         >
           {items.map((item, index) => (
@@ -98,25 +94,27 @@ function ReorderRow({
         aria-hidden="true"
         onPointerDown={(event) => dragControls.start(event)}
       >
-        ⠿
+        <DemoIcon name="grip" />
       </span>
       <span className="motion-reorder-title">{item}</span>
       <div className="motion-reorder-buttons">
         <button
+          className="demo-button demo-button-small demo-button-square demo-button-ghost"
           type="button"
           aria-label={`Move ${item} up`}
           disabled={index === 0}
           onClick={() => onMove(item, -1)}
         >
-          ↑
+          <DemoIcon name="arrow-up" />
         </button>
         <button
+          className="demo-button demo-button-small demo-button-square demo-button-ghost"
           type="button"
           aria-label={`Move ${item} down`}
           disabled={index === count - 1}
           onClick={() => onMove(item, 1)}
         >
-          ↓
+          <DemoIcon name="arrow-down" />
         </button>
       </div>
     </Reorder.Item>

@@ -1,13 +1,14 @@
 .motion-example {
-  margin: 24px 0;
-  padding: 28px;
-  border: 1px solid var(--demo-border);
-  border-radius: 12px;
+  container-type: inline-size;
+  margin-block: 24px;
+  padding: 16px;
+  border-radius: 8px;
   background: var(--demo-surface);
+  box-shadow: var(--demo-shadow-weak);
   color: var(--demo-text);
   font-family: inherit;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 20px;
 }
 
 .motion-example * {
@@ -17,129 +18,103 @@
   margin: 0;
 }
 .motion-example strong {
-  color: inherit;
-  font-weight: 550;
+  color: var(--demo-strong);
+  font-weight: 500;
 }
-
-.motion-example-button,
-.motion-example-reset,
-.motion-reorder-buttons button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-height: 36px;
-  padding: 7px 13px;
-  border: 1px solid var(--demo-border);
-  border-radius: 7px;
-  background: var(--demo-background);
-  color: var(--demo-text);
-  font: inherit;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.motion-example button:focus-visible,
-.motion-example input:focus-visible {
+.motion-layout-filter:focus-visible,
+.motion-layout-card-button:focus-visible,
+.motion-spring-controls input:focus-visible {
   outline: 2px solid var(--demo-accent);
   outline-offset: 3px;
-}
-
-.motion-example-button:hover,
-.motion-example-reset:hover,
-.motion-reorder-buttons button:hover:not(:disabled) {
-  border-color: var(--demo-accent);
 }
 .motion-example-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 12px;
+  margin-block-start: 16px;
 }
 .motion-example-actions p,
 .motion-example-caption {
   color: var(--demo-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 .motion-example .motion-example-caption {
-  margin-top: 20px;
+  margin-block-start: 12px;
 }
 .motion-spring-stage {
   display: grid;
   place-items: center;
-  height: 190px;
-  border: 1px solid var(--demo-border);
-  border-radius: 8px;
+  height: 160px;
+  border-radius: 6px;
   background: var(--demo-background);
 }
 .motion-spring-path {
   position: relative;
-  width: 184px;
-  height: 44px;
+  width: 164px;
+  height: 24px;
 }
 .motion-spring-path::before {
   content: "";
   position: absolute;
-  inset: 21px 0 auto;
+  inset-block-start: 11px;
+  inset-inline: 0;
   height: 2px;
   background: var(--demo-border);
 }
 .motion-spring-marker {
   position: relative;
-  width: 44px;
-  height: 44px;
-  border-radius: 13px;
-  background: var(--demo-accent);
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--demo-solid);
 }
 .motion-spring-controls {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 24px;
+  gap: 16px;
+  margin-block-start: 16px;
 }
 .motion-spring-controls label {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 10px;
+  gap: 8px;
   color: var(--demo-muted);
-  font-size: 12px;
+  font-size: 13px;
 }
 .motion-spring-controls output {
-  color: var(--demo-text);
+  color: var(--demo-strong);
   font-variant-numeric: tabular-nums;
 }
 .motion-spring-controls input {
   width: 100%;
   height: 20px;
   margin: 0;
-  accent-color: var(--demo-accent);
-  cursor: pointer;
+  accent-color: var(--demo-text);
+  cursor: default;
 }
 .motion-layout-filters {
   display: inline-flex;
   gap: 2px;
-  padding: 4px;
-  border: 1px solid var(--demo-border);
-  border-radius: 8px;
-  background: var(--demo-background);
+  padding: 2px;
+  border-radius: 6px;
+  background: var(--demo-hover);
 }
 .motion-layout-filter {
   position: relative;
-  min-width: 70px;
-  min-height: 34px;
-  padding: 6px 13px;
+  min-height: 28px;
+  padding: 4px 10px;
   border: 0;
-  border-radius: 5px;
+  border-radius: 4px;
   background: transparent;
   color: var(--demo-muted);
   font: inherit;
   font-size: 13px;
-  cursor: pointer;
+  cursor: default;
 }
 .motion-layout-filter[aria-pressed="true"] {
-  color: var(--demo-text);
+  color: var(--demo-strong);
 }
 .motion-layout-filter > span:last-child {
   position: relative;
@@ -148,97 +123,100 @@
 .motion-layout-indicator {
   position: absolute;
   inset: 0;
-  border: 1px solid var(--demo-border);
   border-radius: inherit;
-  background: var(--demo-surface);
+  background: var(--demo-raised);
+  box-shadow: var(--demo-shadow-weak);
 }
 .motion-layout-cards {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 272px;
-  margin-top: 24px;
+  min-height: 132px;
+  margin-block-start: 16px;
+  border-block-start: 1px solid var(--demo-border);
 }
 .motion-layout-card {
   margin: 0;
-  padding: 18px 20px;
-  border: 1px solid var(--demo-border);
-  border-radius: 8px;
-  background: var(--demo-background);
-}
-.motion-example-eyebrow {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--demo-muted);
-  font-size: 11px;
+  padding-block: 12px;
+  border-block-end: 1px solid var(--demo-border);
 }
 .motion-layout-card-button {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   padding: 0;
   border: 0;
+  border-radius: 2px;
   background: transparent;
-  color: var(--demo-text);
+  color: var(--demo-strong);
   font: inherit;
-  font-size: 15px;
-  text-align: left;
-  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: start;
+  cursor: default;
 }
-.motion-layout-card-button > span {
+.motion-layout-card-button > .demo-icon {
+  color: var(--demo-muted);
+}
+.motion-layout-file-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.motion-layout-file-label > .demo-icon {
   color: var(--demo-muted);
 }
 .motion-example .motion-layout-detail {
   max-width: 530px;
-  margin: 14px 0 0;
+  margin-block: 8px 0;
+  margin-inline-start: 24px;
   color: var(--demo-muted);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 20px;
 }
 .motion-example-heading {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-.motion-example-reset {
-  min-height: 30px;
-  padding: 4px 10px;
-  font-size: 12px;
+  gap: 12px;
+  margin-block-end: 12px;
 }
 .motion-reorder-list {
-  display: grid;
-  gap: 8px;
+  display: block;
   margin: 0;
   padding: 0;
+  border-block-start: 1px solid var(--demo-border);
   list-style: none;
 }
 .motion-example .motion-reorder-item {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  min-height: 58px;
+  gap: 8px;
+  min-height: 44px;
   margin: 0;
-  padding: 10px 12px;
-  border: 1px solid var(--demo-border);
-  border-radius: 8px;
-  background: var(--demo-background);
+  padding-block: 6px;
+  border-block-end: 1px solid var(--demo-border);
+  background: var(--demo-surface);
   list-style: none;
 }
 .motion-reorder-handle {
   display: grid;
   place-items: center;
   flex-shrink: 0;
-  width: 30px;
-  height: 36px;
+  width: 24px;
+  height: 28px;
+  border-radius: 4px;
   color: var(--demo-muted);
-  font-size: 22px;
   cursor: grab;
   touch-action: none;
   user-select: none;
+}
+.motion-reorder-handle:hover {
+  background: var(--demo-hover);
 }
 .motion-reorder-handle:active {
   cursor: grabbing;
@@ -246,45 +224,27 @@
 .motion-reorder-title {
   flex: 1;
   min-width: 0;
-  font-size: 13px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
 }
 .motion-reorder-buttons {
   display: flex;
-  gap: 4px;
-}
-.motion-reorder-buttons button {
-  width: 30px;
-  min-height: 30px;
-  padding: 3px;
-  font-size: 16px;
-}
-.motion-reorder-buttons button:disabled {
-  color: var(--demo-border);
-  cursor: default;
+  gap: 2px;
 }
 
-@media (max-width: 600px) {
-  .motion-example {
-    padding: 20px;
-  }
+@container (max-width: 420px) {
   .motion-spring-controls {
     grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  .motion-spring-stage {
-    height: 160px;
+    gap: 12px;
   }
   .motion-example-actions {
     align-items: flex-start;
   }
-  .motion-layout-card {
-    padding: 16px;
-  }
-  .motion-example .motion-reorder-item {
-    gap: 6px;
-    padding: 8px;
-  }
-  .motion-reorder-handle {
-    width: 22px;
+}
+
+@media (forced-colors: active) {
+  .motion-example,
+  .motion-layout-indicator {
+    border: 1px solid CanvasText;
   }
 }

@@ -1,5 +1,6 @@
 import { useEffect, useId, useState } from "react";
 
+import { DemoIcon } from "./demo-icons.tsx";
 import { RangeControl } from "./shader-controls.tsx";
 import { PALETTES, SHADERS } from "./shader-presets.ts";
 import type { ShaderId, ShaderPalette, ShaderSettings } from "./shader-presets.ts";
@@ -66,7 +67,7 @@ function ShaderExample({ effect }: { effect: ShaderId }) {
   }
 
   return (
-    <section className="shader-example" aria-label={`${effectName} example`}>
+    <section className="shader-example not-prose" aria-label={`${effectName} example`}>
       <div className="shader-example-layout">
         <div
           className="shader-example-preview"
@@ -81,20 +82,24 @@ function ShaderExample({ effect }: { effect: ShaderId }) {
           <legend>Parameters</legend>
           <div className="shader-palette-field">
             <label htmlFor={paletteId}>Palette</label>
-            <select
-              id={paletteId}
-              value={palette.id}
-              onChange={(event) => {
-                const next = PALETTES.find((item) => item.id === event.currentTarget.value);
-                if (next) setPalette(next);
-              }}
-            >
-              {PALETTES.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
+            <span className="demo-select-wrap">
+              <select
+                className="demo-select"
+                id={paletteId}
+                value={palette.id}
+                onChange={(event) => {
+                  const next = PALETTES.find((item) => item.id === event.currentTarget.value);
+                  if (next) setPalette(next);
+                }}
+              >
+                {PALETTES.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+              <DemoIcon name="chevron-down" />
+            </span>
           </div>
 
           <div className="shader-example-ranges">
@@ -144,12 +149,19 @@ function ShaderExample({ effect }: { effect: ShaderId }) {
           <div className="shader-example-actions">
             <button
               type="button"
+              className="demo-button demo-button-small"
               aria-label={animationStopped ? "Play animation" : "Pause animation"}
               onClick={togglePlayback}
             >
+              <DemoIcon name={animationStopped ? "play" : "pause"} />
               {animationStopped ? "Play" : "Pause"}
             </button>
-            <button type="button" onClick={reset}>
+            <button
+              type="button"
+              className="demo-button demo-button-small demo-button-ghost"
+              onClick={reset}
+            >
+              <DemoIcon name="reset" />
               Reset
             </button>
           </div>

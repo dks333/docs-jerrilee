@@ -3,18 +3,18 @@ import { useState } from "react";
 
 import "./base-ui-example.css";
 
-const stays = [
-  { name: "Little cabin", location: "In the woods", price: 80 },
-  { name: "Garden studio", location: "Near the coast", price: 120 },
-  { name: "Hilltop cottage", location: "Above the valley", price: 160 },
-  { name: "Lake house", location: "By the water", price: 220 },
+const runners = [
+  { name: "Small", resources: "2 vCPU · 4 GB memory", price: 80 },
+  { name: "Medium", resources: "4 vCPU · 8 GB memory", price: 120 },
+  { name: "Large", resources: "8 vCPU · 16 GB memory", price: 160 },
+  { name: "Extra large", resources: "16 vCPU · 32 GB memory", price: 220 },
 ];
 
 export function BaseUiSlider() {
   const [range, setRange] = useState<number[]>([60, 180]);
   const minimum = range[0] ?? 60;
   const maximum = range[1] ?? 180;
-  const matches = stays.filter((stay) => stay.price >= minimum && stay.price <= maximum);
+  const matches = runners.filter((runner) => runner.price >= minimum && runner.price <= maximum);
 
   return (
     <div className="base-ui-example">
@@ -29,7 +29,7 @@ export function BaseUiSlider() {
         thumbCollisionBehavior="none"
       >
         <div className="base-ui-demo-heading">
-          <Slider.Label>Nightly budget</Slider.Label>
+          <Slider.Label>Monthly budget</Slider.Label>
           <Slider.Value>{() => `$${minimum} – $${maximum}`}</Slider.Value>
         </div>
         <Slider.Control className="base-ui-range-control">
@@ -38,12 +38,12 @@ export function BaseUiSlider() {
             <Slider.Thumb
               className="base-ui-range-thumb"
               index={0}
-              aria-label="Minimum nightly price"
+              aria-label="Minimum monthly price"
             />
             <Slider.Thumb
               className="base-ui-range-thumb"
               index={1}
-              aria-label="Maximum nightly price"
+              aria-label="Maximum monthly price"
             />
           </Slider.Track>
         </Slider.Control>
@@ -53,26 +53,22 @@ export function BaseUiSlider() {
         </div>
       </Slider.Root>
       <p className="base-ui-helper" role="status">
-        {matches.length} of {stays.length} stays within your budget.
+        {matches.length} of {runners.length} example runners within budget.
       </p>
       <div className="base-ui-stays">
-        {matches.map((stay) => (
-          <div className="base-ui-stay" key={stay.name}>
+        {matches.map((runner) => (
+          <div className="base-ui-stay" key={runner.name}>
             <div>
-              <strong>{stay.name}</strong>
-              <span>{stay.location}</span>
+              <strong>{runner.name}</strong>
+              <span>{runner.resources}</span>
             </div>
             <strong>
-              ${stay.price}
-              <small> / night</small>
+              ${runner.price}
+              <small> / month</small>
             </strong>
           </div>
         ))}
-        {matches.length === 0 && (
-          <p className="base-ui-empty-result">
-            No stays in this range. Widen your budget to see more.
-          </p>
-        )}
+        {matches.length === 0 && <p className="base-ui-empty-result">No runners in this range.</p>}
       </div>
     </div>
   );

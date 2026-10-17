@@ -37,13 +37,14 @@ export function formatCompact(value: number) {
   return String(value);
 }
 
-export const chartTick = { fill: "var(--chart-muted)", fontSize: 11 };
+export const chartTick = { fill: "var(--chart-muted)", fontSize: 13 };
 
 export const chartTooltipStyle = {
-  background: "var(--chart-background)",
-  border: "1px solid var(--chart-grid)",
-  borderRadius: 6,
+  background: "var(--demo-raised)",
+  border: "none",
+  borderRadius: 8,
   color: "var(--chart-text)",
-  fontSize: 12,
-  boxShadow: "0 4px 16px rgb(0 0 0 / 8%)",
+  fontSize: 13,
+  lineHeight: "20px",
+  boxShadow: "var(--demo-shadow-popup)",
 };
