@@ -1,0 +1,92 @@
+---
+title: "Area chart"
+description: "Stack two request series and turn either one off."
+keywords: ["Recharts", "area chart", "stacked chart", "React"]
+---
+
+import { RechartsExample } from "/snippets/recharts-example.tsx";
+
+Package: [`recharts`](https://www.npmjs.com/package/recharts).
+
+<RechartsExample />
+
+## Try it
+
+Move across the chart to inspect a day. Uncheck **Cached** or **Uncached** to see the other series on its own. At least one series stays selected.
+
+The chart and the data table use the same sample data. Open **View data** to read exact values without using the chart.
+
+## Code
+
+```jsx requests-chart.jsx
+import { useState } from "react";
+import {
+  Area, AreaChart, CartesianGrid, ResponsiveContainer,
+  Tooltip, XAxis, YAxis,
+} from "recharts";
+
+const data = [
+  { day: "Oct 1", cached: 12400, uncached: 4200 },
+  { day: "Oct 2", cached: 16800, uncached: 5100 },
+  { day: "Oct 3", cached: 14200, uncached: 4600 },
+  { day: "Oct 4", cached: 19600, uncached: 6200 },
+  { day: "Oct 5", cached: 22400, uncached: 5800 },
+  { day: "Oct 6", cached: 15800, uncached: 3900 },
+  { day: "Oct 7", cached: 18200, uncached: 4700 },
+];
+
+export function RequestsChart() {
+  const [cached, setCached] = useState(true);
+  const [uncached, setUncached] = useState(true);
+
+  return (
+    <div>
+      <fieldset>
+        <legend>Visible series</legend>
+        <label>
+          <input type="checkbox" checked={cached} disabled={!uncached}
+            onChange={(event) => setCached(event.target.checked)} />
+          Cached
+        </label>
+        <label>
+          <input type="checkbox" checked={uncached} disabled={!cached}
+            onChange={(event) => setUncached(event.target.checked)} />
+          Uncached
+        </label>
+      </fieldset>
+      <div style={{ width: "100%", height: 320 }}>
+        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <AreaChart data={data} accessibilityLayer>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="day" />
+            <YAxis width={48} />
+            <Tooltip isAnimationActive={false} />
+            <Area dataKey="cached" name="Cached" type="monotone"
+              stackId="requests" stroke="#3e6553" fill="#dce9df"
+              fillOpacity={1} hide={!cached} isAnimationActive={false} />
+            <Area dataKey="uncached" name="Uncached" type="monotone"
+              stackId="requests" stroke="#61778e" fill="#e1e8ec"
+              fillOpacity={1} hide={!uncached} isAnimationActive={false} />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+```
+
+## Key props
+
+| Prop | What it does here |
+| --- | --- |
+| `stackId` | Adds the two areas together instead of overlapping them. |
+| `hide` | Keeps a series in the chart configuration while changing its visibility. |
+| `ResponsiveContainer` | Measures the parent. Its parent needs an explicit height. |
+| `isAnimationActive={false}` | Draws the series without a reveal animation. |
+| `accessibilityLayer` | Enables Recharts keyboard navigation through data points. |
+
+## Next
+
+Compare two units in a [composed chart](/recharts/composed-chart), or link separate views with [synchronized charts](/recharts/synchronized-charts).
+
+See the [Recharts Area reference](https://recharts.github.io/en-US/api/Area/).

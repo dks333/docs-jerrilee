@@ -1,0 +1,49 @@
+---
+title: "From npm to your docs"
+description: "A real package import, bundled and served by the Mint CLI."
+keywords: ["package imports", "Mint CLI", "React snippets"]
+---
+
+Each example imports a public npm package in a React snippet and renders it inside the documentation page.
+
+## Packages
+
+| Package | npm | Examples |
+| --- | --- | --- |
+| Paper Shaders | [@paper-design/shaders-react](https://www.npmjs.com/package/@paper-design/shaders-react) | [Shaders](/paper-shaders/mesh-gradient) |
+| Base UI | [@base-ui/react](https://www.npmjs.com/package/@base-ui/react) | [Components](/base-ui/dialog) |
+| Tiptap | [@tiptap/react](https://www.npmjs.com/package/@tiptap/react) | [Document editor](/tiptap/editor) |
+| Recharts | [recharts](https://www.npmjs.com/package/recharts) | [Charts](/recharts/area-chart) |
+| React Flow | [@xyflow/react](https://www.npmjs.com/package/@xyflow/react) | [Workflows](/react-flow/workflow) |
+| Motion | [motion](https://www.npmjs.com/package/motion) | [Animation](/motion/springs) |
+
+## Add a package
+
+Paper Shaders is one example of the same import flow.
+
+<Steps>
+  <Step title="Install the package">
+    ```bash
+    pnpm add --save-exact @paper-design/shaders-react@0.0.81 react@19.2.3 react-dom@19.2.3
+    ```
+  </Step>
+  <Step title="Enable package imports">
+    Add `"packages": {}` to `docs.json`. Keep `package.json` and the lockfile alongside it.
+  </Step>
+  <Step title="Import a component in a snippet">
+    ```jsx
+    import { MeshGradient } from '@paper-design/shaders-react';
+
+    export function Example() {
+      return <MeshGradient width="100%" height={420} colors={['#5100ff', '#00ff80', '#ffcc00']} />;
+    }
+    ```
+  </Step>
+  <Step title="Start the local preview">
+    ```bash
+    MINTLIFY_NATIVE_NPM_PACKAGES=1 mint dev --port 3344
+    ```
+  </Step>
+</Steps>
+
+[Open Mesh Gradient](/paper-shaders/mesh-gradient)

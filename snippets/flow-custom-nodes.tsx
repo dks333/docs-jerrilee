@@ -1,0 +1,141 @@
+import { useCallback } from "react";
+import {
+  addEdge,
+  Background,
+  Controls,
+  Handle,
+  Position,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+} from "@xyflow/react";
+import type { Connection, Node, NodeProps } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import "./flow-example.css";
+
+type BudgetNode = Node<
+  { kind: "input" | "result"; amount: number; onChange?: (amount: number) => void },
+  "budget"
+>;
+
+function BudgetCard({ data }: NodeProps<BudgetNode>) {
+  if (data.kind === "input")
+    return (
+      <div className="flow-budget-card">
+        <span>Monthly budget</span>
+        <label>
+          <span className="flow-sr-only">Monthly budget in dollars</span>
+          <input
+            className="nodrag"
+            type="number"
+            min={0}
+            max={100000}
+            step={25}
+            value={data.amount}
+            onChange={(event) => {
+              const value = event.currentTarget.valueAsNumber;
+              if (Number.isFinite(value)) data.onChange?.(Math.max(0, Math.min(100000, value)));
+            }}
+          />
+        </label>
+        <small>USD / month</small>
+        <Handle type="source" position={Position.Right} />
+      </div>
+    );
+  return (
+    <div className="flow-budget-card">
+      <Handle type="target" position={Position.Left} />
+      <span>Annual budget</span>
+      <output>${data.amount.toLocaleString("en-US")}</output>
+      <small>Monthly × 12</small>
+    </div>
+  );
+}
+const nodeTypes = { budget: BudgetCard };
+const initialNodes: BudgetNode[] = [
+  {
+    id: "monthly",
+    type: "budget",
+    position: { x: 40, y: 100 },
+    data: { kind: "input", amount: 250 },
+    width: 210,
+    height: 150,
+    handles: [{ type: "source", position: Position.Right, x: 210, y: 75 }],
+  },
+  {
+    id: "annual",
+    type: "budget",
+    position: { x: 450, y: 100 },
+    data: { kind: "result", amount: 3000 },
+    width: 210,
+    height: 150,
+    handles: [{ type: "target", position: Position.Left, x: 0, y: 75 }],
+  },
+];
+const initialEdges = [{ id: "budget", source: "monthly", target: "annual" }];
+
+export function FlowCustomNodes() {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const updateAmount = useCallback(
+    (amount: number) =>
+      setNodes((current) =>
+        current.map((node) => {
+          if (node.id === "monthly") return { ...node, data: { ...node.data, amount } };
+          return node;
+        }),
+      ),
+    [setNodes],
+  );
+  const monthly = nodes.find((node) => node.id === "monthly")?.data.amount ?? 0;
+  const connected = edges.some((edge) => edge.source === "monthly" && edge.target === "annual");
+  const renderedNodes = nodes.map((node) => {
+    if (node.id === "monthly") return { ...node, data: { ...node.data, onChange: updateAmount } };
+    return { ...node, data: { ...node.data, amount: connected ? monthly * 12 : 0 } };
+  });
+  const onConnect = useCallback(
+    (connection: Connection) => setEdges((current) => addEdge(connection, current)),
+    [setEdges],
+  );
+  return (
+    <section className="flow-example not-prose" aria-label="Custom budget nodes">
+      <div className="flow-toolbar">
+        <span>Data flows through the connection</span>
+        <button
+          type="button"
+          onClick={() => {
+            setNodes(initialNodes);
+            setEdges(initialEdges);
+          }}
+        >
+          Reset diagram
+        </button>
+      </div>
+      <div className="flow-canvas">
+        <ReactFlow
+          id="budget-flow"
+          nodes={renderedNodes}
+          edges={edges}
+          nodeTypes={nodeTypes}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          width={740}
+          height={390}
+          fitView
+          fitViewOptions={{ padding: 0.25 }}
+          minZoom={0.35}
+          maxZoom={1.5}
+          colorMode="system"
+        >
+          <Background gap={22} color="var(--demo-border)" />
+          <Controls showInteractive={false} />
+        </ReactFlow>
+      </div>
+      <p className="flow-caption" role="status">
+        Annual total: ${connected ? (monthly * 12).toLocaleString("en-US") : "0"}. Change the
+        monthly value, or delete the connection to stop the calculation.
+      </p>
+    </section>
+  );
+}

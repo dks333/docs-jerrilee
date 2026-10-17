@@ -1,0 +1,37 @@
+---
+title: "Mesh Gradient"
+description: "Animated color blending with adjustable distortion and swirl."
+keywords: ["package imports", "Paper Shaders", "WebGL", "React"]
+---
+
+import { ShaderPlayground } from "/snippets/shader-playground.tsx";
+
+<ShaderPlayground effect="mesh-gradient" />
+
+## Code
+
+Initial configuration. The controls above change the preview.
+
+```jsx MeshGradient.jsx
+import { MeshGradient } from '@paper-design/shaders-react';
+
+export function ShaderExample() {
+  return (
+    <div style={{ width: '100%', height: 420 }}>
+      <MeshGradient
+        width="100%"
+        height="100%"
+        maxPixelCount={2000000}
+        speed={0.45}
+        scale={1}
+        rotation={0}
+        colors={["#1b0a3d","#7251ff","#f25dbb","#dac9ff"]}
+        distortion={0.8}
+        swirl={0.35}
+        grainMixer={0}
+        grainOverlay={0}
+      />
+    </div>
+  );
+}
+```

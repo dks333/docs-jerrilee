@@ -1,33 +1,16 @@
-> **First-time setup**: Customize this file for your project. Prompt the user to customize this file for their project.
-> For Mintlify product knowledge (components, configuration, writing standards),
-> install the Mintlify skill: `npx skills add https://mintlify.com/docs`
+# Package imports showcase
 
-# Documentation project instructions
+This Mintlify documentation site demonstrates public npm packages through React snippets.
 
-## About this project
-
-- This is a documentation site built on [Mintlify](https://mintlify.com)
-- Pages are MDX files with YAML frontmatter
-- Configuration lives in `docs.json`
-- Use the Mintlify MCP server, `https://mcp.mintlify.com`, to edit content and settings via MCP
-- Use the Mintlify docs MCP server, `https://www.mintlify.com/docs/mcp`, to query information about using Mintlify via MCP
-
-## Terminology
-
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
-
-## Style preferences
-
-{/* Add any project-specific style rules below */}
-
-- Use active voice and second person ("you")
-- Keep sentences concise — one idea per sentence
-- Use sentence case for headings
-- Bold for UI elements: Click **Settings**
-- Code formatting for file names, commands, paths, and code references
-
-## Content boundaries
-
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Keep theme, colors, fonts, and native navigation in docs.json. The current theme is Luma.
+- Use Node 24 and pnpm 12.6.0, as declared in package.json.
+- Install existing dependencies with pnpm install --frozen-lockfile.
+- Start the local native package preview with pnpm dev.
+- Run pnpm type, pnpm lint, and pnpm format before publishing changes.
+- Keep a separate page for every example, with a native table of contents, an npm link, and an always-visible native code block.
+- Use explicit .tsx and .ts extensions for local snippet imports.
+- Scope example CSS and consume shared --demo-* tokens from styles.css. Prefer docs.json over global overrides for native UI.
+- Keep examples self-contained, accessible, and usable on mobile. Respect reduced motion and avoid entrance animations on refresh.
+- Tiptap uses public extensions only, without Yjs or paid templates. Edits remain local to each example.
+- Keep node_modules, generated .mintlify files, logs, and screenshots out of Git.
+- Published mint validate still uses a legacy snippet validator; verify native npm imports through the actual mint dev build and browser.

@@ -1,0 +1,85 @@
+---
+title: "Pie chart"
+description: "Select a source to inspect its share of the total."
+keywords: ["Recharts", "pie chart", "donut chart", "selection"]
+---
+
+import { RechartsPie } from "/snippets/recharts-pie.tsx";
+
+Package: [`recharts`](https://www.npmjs.com/package/recharts).
+
+<RechartsPie />
+
+## Try it
+
+Click a slice or select a source in the list. The selected slice extends outward and the center label shows its share. The source buttons also work with a keyboard.
+
+Selection stays in React state, so it remains selected when you move your pointer away. Open **View data** for all counts and percentages.
+
+## Code
+
+```jsx sources-chart.jsx
+import { useState } from "react";
+import { Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from "recharts";
+
+const data = [
+  { name: "Direct", value: 4200, color: "#3e6553" },
+  { name: "Search", value: 3100, color: "#ae674c" },
+  { name: "Referrals", value: 1800, color: "#61778e" },
+  { name: "Email", value: 900, color: "#b1a173" },
+];
+const total = data.reduce((sum, source) => sum + source.value, 0);
+
+export function SourcesChart() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selected = data[selectedIndex];
+  const percent = Math.round(((selected?.value ?? 0) / total) * 100);
+
+  return (
+    <div>
+      <div style={{ width: "100%", height: 300 }}>
+        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <PieChart accessibilityLayer>
+            <Pie data={data} dataKey="value" nameKey="name"
+              innerRadius="58%" outerRadius="78%" paddingAngle={3}
+              isAnimationActive={false}
+              onClick={(_sector, index) => setSelectedIndex(index)}
+              shape={(props) => (
+                <Sector {...props} fill={data[props.index]?.color}
+                  outerRadius={props.outerRadius +
+                    (props.index === selectedIndex ? 8 : 0)} />
+              )} />
+            <Tooltip isAnimationActive={false} />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+      <div aria-label="Traffic sources">
+        {data.map((source, index) => (
+          <button type="button" key={source.name}
+            aria-pressed={index === selectedIndex}
+            onClick={() => setSelectedIndex(index)}>
+            {source.name}
+          </button>
+        ))}
+      </div>
+      <p role="status">{selected?.name}: {percent}%</p>
+    </div>
+  );
+}
+```
+
+## Key props
+
+| Prop | What it does here |
+| --- | --- |
+| `innerRadius` | Turns a pie into a donut. |
+| `paddingAngle` | Adds a small gap between the slices. |
+| `onClick` | Stores the selected slice index in React state. |
+| `shape` | Renders a `Sector` with a larger radius for the selection. |
+| `aria-pressed` | Exposes the selected source on the matching HTML button. |
+
+## Next
+
+Compare changes over time with an [area chart](/recharts/area-chart).
+
+See the [Recharts Pie reference](https://recharts.github.io/en-US/api/Pie/).

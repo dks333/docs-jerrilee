@@ -1,0 +1,165 @@
+import { useCallback, useId, useState } from "react";
+import {
+  addEdge,
+  Background,
+  Controls,
+  ReactFlow,
+  useEdgesState,
+  useNodesState,
+} from "@xyflow/react";
+import type { Connection, Edge, Node } from "@xyflow/react";
+import { connectionError, makeNode, workflowEdges, workflowNodes } from "./flow-data.ts";
+import "@xyflow/react/dist/style.css";
+import "./flow-example.css";
+
+const validationNodes: Node[] = [
+  makeNode("ingest", "Ingest", 30, 80),
+  makeNode("transform", "Transform", 260, 180),
+  makeNode("publish", "Publish", 490, 80),
+];
+const validationEdges: Edge[] = [
+  { id: "ingest-transform", source: "ingest", target: "transform" },
+  { id: "transform-publish", source: "transform", target: "publish" },
+];
+
+export function FlowExample({ validation = false }: { validation?: boolean }) {
+  const [nodes, setNodes, onNodesChange] = useNodesState(
+    validation ? validationNodes : workflowNodes(),
+  );
+  const [edges, setEdges, onEdgesChange] = useEdgesState(
+    validation ? validationEdges : workflowEdges(),
+  );
+  const [source, setSource] = useState("publish");
+  const [target, setTarget] = useState("ingest");
+  const [message, setMessage] = useState("Connections must point forward without a cycle.");
+  const selectedSource = nodes.some((node) => node.id === source) ? source : (nodes[0]?.id ?? "");
+  const selectedTarget = nodes.some((node) => node.id === target)
+    ? target
+    : (nodes[nodes.length - 1]?.id ?? "");
+  const sourceId = useId();
+  const targetId = useId();
+  const validConnection = useCallback(
+    (connection: Edge | Connection) =>
+      nodes.some((node) => node.id === connection.source) &&
+      nodes.some((node) => node.id === connection.target) &&
+      !connectionError(connection, edges),
+    [edges, nodes],
+  );
+  const onConnect = useCallback(
+    (connection: Connection) => {
+      if (
+        !nodes.some((node) => node.id === connection.source) ||
+        !nodes.some((node) => node.id === connection.target)
+      ) {
+        setMessage("Choose two existing steps.");
+        return;
+      }
+      if (validation) {
+        const error = connectionError(connection, edges);
+        if (error) {
+          setMessage(error);
+          return;
+        }
+      }
+      setEdges((current) => addEdge(connection, current));
+      setMessage(`Connected ${connection.source} to ${connection.target}.`);
+    },
+    [edges, nodes, setEdges, validation],
+  );
+
+  function reset() {
+    setNodes(validation ? validationNodes : workflowNodes());
+    setEdges(validation ? validationEdges : workflowEdges());
+    setMessage("Connections must point forward without a cycle.");
+  }
+
+  return (
+    <section
+      className="flow-example not-prose"
+      aria-label={validation ? "Connection validation example" : "Workflow example"}
+    >
+      <div className="flow-toolbar">
+        <span>
+          {nodes.length} steps · {edges.length} connections
+        </span>
+        <button type="button" onClick={reset}>
+          Reset diagram
+        </button>
+      </div>
+      <div className="flow-canvas">
+        <ReactFlow
+          id={validation ? "validation-flow" : "workflow-flow"}
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          isValidConnection={validation ? validConnection : undefined}
+          width={740}
+          height={430}
+          fitView
+          fitViewOptions={{ padding: 0.2 }}
+          minZoom={0.35}
+          maxZoom={1.8}
+          colorMode="system"
+          defaultEdgeOptions={{ type: "smoothstep" }}
+        >
+          <Background gap={22} size={1} color="var(--demo-border)" />
+          <Controls showInteractive={false} />
+        </ReactFlow>
+      </div>
+      {validation && (
+        <form
+          className="flow-validation"
+          onSubmit={(event) => {
+            event.preventDefault();
+            onConnect({
+              source: selectedSource,
+              target: selectedTarget,
+              sourceHandle: null,
+              targetHandle: null,
+            });
+          }}
+        >
+          <label htmlFor={sourceId}>
+            From
+            <select
+              id={sourceId}
+              value={selectedSource}
+              onChange={(event) => setSource(event.currentTarget.value)}
+            >
+              {nodes.map((node) => (
+                <option key={node.id} value={node.id}>
+                  {String(node.data.label)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label htmlFor={targetId}>
+            To
+            <select
+              id={targetId}
+              value={selectedTarget}
+              onChange={(event) => setTarget(event.currentTarget.value)}
+            >
+              {nodes.map((node) => (
+                <option key={node.id} value={node.id}>
+                  {String(node.data.label)}
+                </option>
+              ))}
+            </select>
+          </label>
+          <button type="submit" disabled={nodes.length < 2}>
+            Add connection
+          </button>
+          <p role="status">{message}</p>
+        </form>
+      )}
+      {!validation && (
+        <p className="flow-caption">
+          Drag a step, connect the handles, or select a connection and press Backspace to remove it.
+        </p>
+      )}
+    </section>
+  );
+}

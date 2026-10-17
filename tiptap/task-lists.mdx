@@ -1,0 +1,66 @@
+---
+title: "Task lists"
+description: "Check things off, add the next step, and nest the details underneath."
+keywords: ["Tiptap", "tasks", "checkbox", "nested lists"]
+---
+
+import { TiptapExample } from "/snippets/tiptap-example.tsx";
+
+Package: [`@tiptap/react`](https://www.npmjs.com/package/@tiptap/react).
+
+<TiptapExample variant="tasks" />
+
+## Try it
+
+Check off a task. Place the cursor at the end of a task and press Enter to add another. Press Tab on a task to nest it under the previous one; Shift+Tab brings it back out.
+
+## Extensions
+
+`TaskList` stores the list. `TaskItem` supplies each checkbox, its checked state, and keyboard behavior. Enable `nested` to allow tasks inside tasks.
+
+```tsx task-list.tsx
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { TaskItem, TaskList } from "@tiptap/extension-list";
+
+export function TaskEditor() {
+  const editor = useEditor({
+    extensions: [
+      StarterKit,
+      TaskList,
+      TaskItem.configure({ nested: true }),
+    ],
+    content: {
+      type: "doc",
+      content: [{
+        type: "taskList",
+        content: [{
+          type: "taskItem",
+          attrs: { checked: false },
+          content: [{
+            type: "paragraph",
+            content: [{ type: "text", text: "Take the first draft for a walk" }],
+          }],
+        }],
+      }],
+    },
+    immediatelyRender: false,
+  });
+
+  return <EditorContent editor={editor} />;
+}
+```
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| `Enter` | Add a task |
+| `Tab` | Nest under the previous task |
+| `Shift Tab` | Move out one level |
+| `[ ]` then Space on a new line | Start a task list |
+| `⌘ Shift 9` / `Ctrl Shift 9` | Toggle a task list |
+
+Checkboxes have accessible labels taken from their task text. Changes remain in this example until you refresh.
+
+[Task list documentation](https://tiptap.dev/docs/editor/extensions/nodes/task-list) · [Task item documentation](https://tiptap.dev/docs/editor/extensions/nodes/task-item)

@@ -1,55 +1,49 @@
-# Mintlify Starter Kit
+# Mintlify package imports showcase
 
-Use the starter kit to get your docs deployed and ready to customize.
+A local documentation site with 24 interactive example pages and six native package tabs. Every example uses an always-visible Mintlify code block.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+## Run
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+Use Node 24 and the declared pnpm 12.6.0 version:
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
-
-## AI-assisted writing
-
-Set up your AI coding tool to work with Mintlify:
-
-```bash
-npx skills add https://mintlify.com/docs
+```sh
+pnpm install --frozen-lockfile
+pnpm dev
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+Open http://localhost:3344/tiptap/editor.
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+## Examples
 
-## Development
+| Package | Examples | Version |
+| --- | --- | --- |
+| [Paper Shaders](https://www.npmjs.com/package/@paper-design/shaders-react) | Mesh Gradient, Dot Orbit, Warp, Liquid Metal, Dithering, Grain Gradient | 0.0.81 |
+| [Base UI](https://www.npmjs.com/package/@base-ui/react) | Dialog, Combobox, Menu, Range slider | 1.9.0 |
+| [Tiptap](https://www.npmjs.com/package/@tiptap/react) | Document editor, Slash commands, Task lists, Tables | 3.32.0 |
+| [Recharts](https://www.npmjs.com/package/recharts) | Area, Composed with Brush, Pie, Synchronized charts | 3.10.1 |
+| [React Flow](https://www.npmjs.com/package/@xyflow/react) | Workflow, Custom nodes, Connection validation | 12.12.0 |
+| [Motion](https://www.npmjs.com/package/motion) | Springs, Layout, Reorder | 14.3.0 |
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+## Design
 
+Luma, Inter, warm paper (#FBFAF7), charcoal (#151917), and muted forest (#3E6553). Shell configuration lives in docs.json; styles.css defines shared example tokens. Each component has scoped CSS. No global custom JavaScript is needed.
+
+React Flow and Motion add editable graphs and spatial animation to the original four packages. Official sources: https://reactflow.dev/learn/advanced-use/ssr-ssg-configuration and https://motion.dev/docs/react-accessibility.
+
+Tiptap uses public extensions and an original document UI. It does not use the paid Notion template, Yjs, persistence, or an external service. Edits are local to the current example.
+
+## Rendering
+
+The command enables native npm package imports in the real Mint CLI. React Flow includes node and handle geometry for initial HTML. Tiptap starts with a matching read-only document until its editor initializes. Recharts 3.10 initializes SVG charts in the browser; fixed-height shells reserve space and reveal animations are disabled. Paper Shaders requires WebGL.
+
+The ProseMirror override aligns model implementations for Tiptap list commands. It appears in pnpm-workspace.yaml for pnpm12 and package.json for older hosted installers. pmOnFail: ignore preserves the single-document lock format consumed by the package builder.
+
+## Checks
+
+```sh
+pnpm type && pnpm lint && pnpm format
 ```
-npm i -g mint
-```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+The published CLI's strict mint validate command still uses the legacy snippet validator and rejects npm imports. Verify this feature through the native mint dev build and actual browser interactions instead.
 
-```
-mint dev
-```
-
-View your local preview at `http://localhost:3000`.
-
-## Publishing changes
-
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+This is a local CLI demo. No hosted deployment has been performed.

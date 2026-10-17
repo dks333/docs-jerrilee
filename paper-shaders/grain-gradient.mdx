@@ -1,0 +1,46 @@
+---
+title: "Grain Gradient"
+description: "Animated gradients with a printed grain texture."
+---
+
+import { ShaderPlayground } from "/snippets/shader-playground.tsx";
+
+Package: [`@paper-design/shaders-react`](https://www.npmjs.com/package/@paper-design/shaders-react).
+
+<ShaderPlayground effect="grain-gradient" />
+
+## Try it
+
+Change the palette, then compare a small scale with a large one. Pause to inspect the texture. The controls use the package's actual shader parameters.
+
+## Code
+
+Initial configuration. The controls change the preview above.
+
+```jsx GrainGradient.jsx
+import { GrainGradient } from '@paper-design/shaders-react';
+
+export function Example() {
+  return (
+    <GrainGradient
+      width="100%"
+      height={420}
+      speed={0.35}
+      scale={1}
+      maxPixelCount={2000000}
+      colors={["#1b0a3d", "#7251ff", "#f25dbb", "#dac9ff"]}
+      colorBack="#10091f"
+      shape="corners"
+      softness={0.5}
+      intensity={0.6}
+      noise={0.35}
+    />
+  );
+}
+```
+
+## Parameters
+
+`softness` controls how colors blend; `noise` controls the grain. Change `shape` to `"wave"`, `"dots"`, or `"blob"` for a different composition.
+
+The preview honors reduced motion and includes a pause control. See the [Paper Shaders reference](https://shaders.paper.design/grain-gradient).

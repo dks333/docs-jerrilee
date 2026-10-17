@@ -1,0 +1,17 @@
+:root {
+  --content-width: 760px;
+  --demo-background: #fbfaf7;
+  --demo-surface: #f3f2ed;
+  --demo-border: #deded6;
+  --demo-text: #242b27;
+  --demo-muted: #626d65;
+  --demo-accent: #3e6553;
+}
+html.dark {
+  --demo-background: #151917;
+  --demo-surface: #1b211e;
+  --demo-border: #343d37;
+  --demo-text: #e7eae5;
+  --demo-muted: #a5b0a7;
+  --demo-accent: #9ec8b1;
+}

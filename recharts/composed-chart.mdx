@@ -1,0 +1,90 @@
+---
+title: "Composed chart"
+description: "Compare request volume and latency, then narrow the date range."
+keywords: ["Recharts", "composed chart", "brush", "dual axis"]
+---
+
+import { RechartsComposed } from "/snippets/recharts-composed.tsx";
+
+Package: [`recharts`](https://www.npmjs.com/package/recharts).
+
+<RechartsComposed />
+
+## Try it
+
+Drag either handle below the chart to choose a smaller date range. Drag the middle of that selection to move it. You can also focus a handle and use the arrow keys.
+
+Bars show request counts on the left axis. The line shows response time in milliseconds on the right axis. The range label updates from the brush event.
+
+## Code
+
+```jsx traffic-chart.jsx
+import { useState } from "react";
+import {
+  Bar, Brush, CartesianGrid, ComposedChart, Legend, Line,
+  ResponsiveContainer, Tooltip, XAxis, YAxis,
+} from "recharts";
+
+const data = [
+  { day: "Oct 1", requests: 16600, latency: 142 },
+  { day: "Oct 2", requests: 21900, latency: 154 },
+  { day: "Oct 3", requests: 18800, latency: 148 },
+  { day: "Oct 4", requests: 25800, latency: 182 },
+  { day: "Oct 5", requests: 28200, latency: 176 },
+  { day: "Oct 6", requests: 19700, latency: 136 },
+  { day: "Oct 7", requests: 22900, latency: 151 },
+];
+
+export function TrafficChart() {
+  const [range, setRange] = useState({
+    startIndex: 0,
+    endIndex: data.length - 1,
+  });
+
+  return (
+    <div>
+      <output aria-live="polite">
+        {data[range.startIndex]?.day}–{data[range.endIndex]?.day}
+      </output>
+      <div style={{ width: "100%", height: 380 }}>
+        <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+          <ComposedChart data={data} accessibilityLayer>
+            <CartesianGrid vertical={false} />
+            <XAxis dataKey="day" />
+            <YAxis yAxisId="requests" width={48} />
+            <YAxis yAxisId="latency" orientation="right"
+              domain={[0, 240]} width={54}
+              tickFormatter={(value) => `${value} ms`} />
+            <Tooltip isAnimationActive={false} />
+            <Legend />
+            <Bar yAxisId="requests" dataKey="requests" name="Requests"
+              fill="#3e6553" maxBarSize={34} isAnimationActive={false} />
+            <Line yAxisId="latency" dataKey="latency" name="Latency (ms)"
+              type="monotone" stroke="#ae674c" dot={false}
+              isAnimationActive={false} />
+            <Brush dataKey="day" height={30} travellerWidth={10}
+              startIndex={range.startIndex} endIndex={range.endIndex}
+              onChange={setRange} ariaLabel="Visible date range" />
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+  );
+}
+```
+
+## Key props
+
+| Prop | What it does here |
+| --- | --- |
+| `yAxisId` | Connects each series to the axis for its unit. |
+| `orientation="right"` | Places the latency scale on the opposite side. |
+| `startIndex` / `endIndex` | Controls the slice of data shown by the brush. |
+| `onChange` | Returns the selected indexes so other UI can use the range. |
+| `travellerWidth` | Gives each brush handle a larger hit area. |
+
+## Next
+
+Use the same range across two plots with [synchronized charts](/recharts/synchronized-charts).
+
+See the [ComposedChart](https://recharts.github.io/en-US/api/ComposedChart/) and [Brush](https://recharts.github.io/en-US/api/Brush/) references.

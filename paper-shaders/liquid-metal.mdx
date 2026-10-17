@@ -1,0 +1,54 @@
+---
+title: "Liquid Metal"
+description: "Metallic reflections with adjustable distortion and stripe density."
+keywords: ["Paper Shaders", "Liquid Metal", "React"]
+---
+
+import { ShaderPlayground } from "/snippets/shader-playground.tsx";
+
+Package: [`@paper-design/shaders-react`](https://www.npmjs.com/package/@paper-design/shaders-react).
+
+<ShaderPlayground effect="liquid-metal" />
+
+## Try it
+
+Choose a palette, change scale, and pause the animation to inspect the result. Use the arrow keys on any focused slider for precise adjustments.
+
+## Code
+
+Initial configuration. The controls above change the preview.
+
+```jsx LiquidMetal.jsx
+import { LiquidMetal } from '@paper-design/shaders-react';
+
+export function ShaderExample() {
+  return (
+    <div style={{ width: '100%', height: 420 }}>
+      <LiquidMetal
+        width="100%"
+        height="100%"
+        maxPixelCount={2000000}
+        speed={0.7}
+        scale={0.6}
+        rotation={0}
+        shape="diamond"
+        colorBack="#10091f"
+        colorTint="#d9c6ff"
+        repetition={2}
+        softness={0.1}
+        shiftRed={0.3}
+        shiftBlue={0.3}
+        distortion={0.07}
+        contour={0.4}
+        angle={70}
+      />
+    </div>
+  );
+}
+```
+
+## Parameters
+
+`repetition` controls stripe density, `distortion` changes the contour, and `colorTint` colors the reflections. Try Graphite for a neutral metal finish.
+
+The canvas is WebGL; the controls are authored for this demo. See the [package reference](https://shaders.paper.design/liquid-metal).

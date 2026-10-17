@@ -1,0 +1,50 @@
+---
+title: "Dot Orbit"
+description: "Animated dots with adjustable size and size variation."
+keywords: ["Paper Shaders", "Dot Orbit", "React"]
+---
+
+import { ShaderPlayground } from "/snippets/shader-playground.tsx";
+
+Package: [`@paper-design/shaders-react`](https://www.npmjs.com/package/@paper-design/shaders-react).
+
+<ShaderPlayground effect="dot-orbit" />
+
+## Try it
+
+Choose a palette, change scale, and pause the animation to inspect the result. Use the arrow keys on any focused slider for precise adjustments.
+
+## Code
+
+Initial configuration. The controls above change the preview.
+
+```jsx DotOrbit.jsx
+import { DotOrbit } from '@paper-design/shaders-react';
+
+export function ShaderExample() {
+  return (
+    <div style={{ width: '100%', height: 420 }}>
+      <DotOrbit
+        width="100%"
+        height="100%"
+        maxPixelCount={2000000}
+        speed={0.65}
+        scale={0.5}
+        rotation={0}
+        colors={["#1b0a3d","#7251ff","#f25dbb","#dac9ff"]}
+        colorBack="#10091f"
+        stepsPerColor={4}
+        size={0.7375}
+        sizeRange={0.3}
+        spreading={1}
+      />
+    </div>
+  );
+}
+```
+
+## Parameters
+
+`size` sets the base dot size. `sizeRange` varies it across the field; `spreading` controls how far particles are distributed.
+
+The canvas is WebGL; the controls are authored for this demo. See the [package reference](https://shaders.paper.design/dot-orbit).

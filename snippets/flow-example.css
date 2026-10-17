@@ -1,0 +1,148 @@
+.flow-example {
+  color: var(--demo-text);
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.flow-example * {
+  box-sizing: border-box;
+}
+.flow-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--demo-border);
+  background: var(--demo-surface);
+}
+.flow-toolbar span,
+.flow-caption {
+  color: var(--demo-muted);
+}
+.flow-example button,
+.flow-example select,
+.flow-example input {
+  font: inherit;
+  color: var(--demo-text);
+  background: var(--demo-background);
+  border: 1px solid var(--demo-border);
+  border-radius: 5px;
+  padding: 7px 10px;
+}
+.flow-example button {
+  cursor: pointer;
+}
+.flow-example button:focus-visible,
+.flow-example input:focus-visible,
+.flow-example select:focus-visible {
+  outline: 2px solid var(--demo-accent);
+  outline-offset: 3px;
+}
+.flow-canvas {
+  height: 430px;
+  width: 100%;
+  background: var(--demo-background);
+}
+.flow-example .react-flow {
+  --xy-background-color: var(--demo-background);
+  --xy-node-background-color: var(--demo-surface);
+  --xy-node-border: 1px solid var(--demo-border);
+  --xy-node-color: var(--demo-text);
+  --xy-node-boxshadow-hover: 0 0 0 1px var(--demo-accent);
+  --xy-node-boxshadow-selected: 0 0 0 2px var(--demo-accent);
+  --xy-edge-stroke: var(--demo-accent);
+  --xy-edge-stroke-width: 1.5;
+  --xy-edge-label-color: var(--demo-muted);
+  --xy-edge-label-background-color: var(--demo-background);
+  --xy-handle-background-color: var(--demo-accent);
+  --xy-handle-border-color: var(--demo-background);
+  --xy-controls-button-background-color: var(--demo-surface);
+  --xy-controls-button-color: var(--demo-text);
+  --xy-controls-button-border-color: var(--demo-border);
+  --xy-attribution-background-color: var(--demo-background);
+}
+.flow-example .react-flow__node-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.flow-example .react-flow__controls-button {
+  padding: 6px;
+}
+.flow-example .react-flow__attribution a {
+  color: var(--demo-muted);
+}
+.flow-caption {
+  margin: 0;
+  border-top: 1px solid var(--demo-border);
+  padding: 14px 18px;
+  font-size: 12px;
+}
+.flow-validation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 12px;
+  padding: 18px;
+  border-top: 1px solid var(--demo-border);
+}
+.flow-validation label {
+  display: grid;
+  gap: 5px;
+  flex: 1;
+  min-width: 120px;
+}
+.flow-validation p {
+  width: 100%;
+  margin: 4px 0 0;
+  color: var(--demo-muted);
+}
+.flow-budget-card {
+  display: grid;
+  gap: 12px;
+  height: 100%;
+  padding: 18px;
+  background: var(--demo-surface);
+  border: 1px solid var(--demo-border);
+  border-radius: 8px;
+}
+.flow-budget-card input {
+  width: 100%;
+  font-size: 20px;
+  padding: 4px 8px;
+}
+.flow-budget-card output {
+  font-size: 28px;
+  font-weight: 550;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.flow-budget-card small {
+  color: var(--demo-muted);
+}
+.flow-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .flow-canvas {
+    height: 360px;
+  }
+  .flow-toolbar {
+    align-items: start;
+    font-size: 12px;
+  }
+  .flow-toolbar button {
+    flex-shrink: 0;
+  }
+}

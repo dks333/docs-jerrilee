@@ -1,0 +1,63 @@
+---
+title: "Tables"
+description: "Edit a small collection, then give it another row or column."
+keywords: ["Tiptap", "table", "TableKit", "React"]
+---
+
+import { TiptapExample } from "/snippets/tiptap-example.tsx";
+
+Package: [`@tiptap/react`](https://www.npmjs.com/package/@tiptap/react).
+
+<TiptapExample variant="tables" />
+
+## Try it
+
+Click a cell to edit it. The table controls use your current cell: add a row below it, add a column to its right, or delete the row. After removing the table, use Insert table to start again.
+
+## Configuration
+
+`TableKit` registers the table, row, header, and cell extensions together. The buttons above the document call these commands.
+
+```tsx table-editor.tsx
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { TableKit } from "@tiptap/extension-table";
+
+export function TableEditor() {
+  const editor = useEditor({
+    extensions: [StarterKit, TableKit],
+    content: "<p>Click below to insert a table.</p>",
+    immediatelyRender: false,
+  });
+
+  return (
+    <>
+      <button
+        type="button"
+        disabled={!editor}
+        onClick={() => editor?.chain().focus().insertTable({
+          rows: 3,
+          cols: 3,
+          withHeaderRow: true,
+        }).run()}
+      >
+        Insert table
+      </button>
+      <EditorContent editor={editor} />
+    </>
+  );
+}
+```
+
+## Table commands
+
+```ts table-commands.ts
+editor.chain().focus().addRowAfter().run();
+editor.chain().focus().addColumnAfter().run();
+editor.chain().focus().deleteRow().run();
+editor.chain().focus().deleteTable().run();
+```
+
+Press Tab to move to the next cell and Shift+Tab to return to the previous one. Text formatting works inside cells too.
+
+[Table documentation](https://tiptap.dev/docs/editor/extensions/nodes/table) · [Document editor](/tiptap/editor)

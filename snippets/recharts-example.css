@@ -1,0 +1,321 @@
+.recharts-example {
+  --chart-background: var(--demo-background, #fbfaf7);
+  --chart-grid: var(--demo-border, #deded6);
+  --chart-text: var(--demo-text, #242b27);
+  --chart-muted: var(--demo-muted, #626d65);
+  --chart-forest: #3e6553;
+  --chart-forest-fill: #dce9df;
+  --chart-clay: #ae674c;
+  --chart-slate: #61778e;
+  --chart-slate-fill: #e1e8ec;
+  --chart-sand: #b1a173;
+  min-width: 0;
+  padding: 24px;
+  border: 1px solid var(--chart-grid);
+  border-radius: 8px;
+  color: var(--chart-text);
+  background: var(--chart-background);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+html.dark .recharts-example {
+  --chart-forest: #9ec8b1;
+  --chart-forest-fill: #263b2e;
+  --chart-clay: #d59d84;
+  --chart-slate: #9baabd;
+  --chart-slate-fill: #303c47;
+  --chart-sand: #c3b893;
+  color-scheme: dark;
+}
+
+.recharts-example *,
+.recharts-example *::before,
+.recharts-example *::after {
+  box-sizing: border-box;
+}
+
+.recharts-example-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.recharts-example-label {
+  color: var(--chart-text);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.recharts-example-subtitle {
+  margin: 5px 0 0;
+  color: var(--chart-muted);
+  font-size: 12px;
+}
+
+.recharts-series-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.recharts-series-controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--chart-text);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.recharts-series-controls input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  accent-color: var(--chart-forest);
+}
+
+.recharts-series-controls input:disabled {
+  cursor: default;
+}
+
+.recharts-series-swatch {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+}
+
+.recharts-swatch-forest {
+  background: var(--chart-forest);
+}
+.recharts-swatch-slate {
+  background: var(--chart-slate);
+}
+
+.recharts-example-chart {
+  width: 100%;
+  height: 320px;
+  min-width: 0;
+}
+
+.recharts-example-chart-tall {
+  height: 380px;
+}
+.recharts-example-chart-small {
+  height: 190px;
+}
+.recharts-example-chart-medium {
+  height: 240px;
+}
+
+.recharts-range-status {
+  color: var(--chart-muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.recharts-example .recharts-surface:focus-visible,
+.recharts-example button:focus-visible,
+.recharts-example input:focus-visible,
+.recharts-example .recharts-brush-traveller:focus-visible {
+  outline: 2px solid var(--chart-forest);
+  outline-offset: 3px;
+}
+
+.recharts-example .recharts-brush-texts {
+  fill: var(--chart-muted);
+  font-size: 11px;
+}
+
+.recharts-example .recharts-brush-slide {
+  fill: var(--chart-forest-fill);
+  fill-opacity: 1;
+}
+
+.recharts-example-data {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--chart-grid);
+  font-size: 12px;
+}
+
+.recharts-example-data summary {
+  width: fit-content;
+  color: var(--chart-muted);
+  cursor: pointer;
+}
+
+.recharts-example-data summary:focus-visible {
+  outline: 2px solid var(--chart-forest);
+  outline-offset: 4px;
+}
+
+.recharts-example-table {
+  overflow-x: auto;
+  margin-top: 16px;
+}
+
+.recharts-example-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+
+.recharts-example-table caption {
+  padding-bottom: 10px;
+  color: var(--chart-muted);
+  text-align: left;
+}
+
+.recharts-example-table th,
+.recharts-example-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--chart-grid);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.recharts-example-table th:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+
+.recharts-example-table th {
+  color: var(--chart-text);
+  font-weight: 500;
+}
+
+.recharts-pie-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(180px, 240px);
+  align-items: center;
+  gap: 24px;
+}
+
+.recharts-pie-chart {
+  position: relative;
+  height: 300px;
+}
+
+.recharts-pie-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.recharts-pie-center strong {
+  color: var(--chart-text);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.2;
+  font-variant-numeric: tabular-nums;
+}
+
+.recharts-pie-center > span {
+  margin-top: 5px;
+  color: var(--chart-muted);
+  font-size: 12px;
+}
+
+.recharts-source-list {
+  display: grid;
+  gap: 5px;
+}
+
+.recharts-source-list button {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  color: var(--chart-text);
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  text-align: left;
+  cursor: pointer;
+}
+
+.recharts-source-list button:hover,
+.recharts-source-list button[aria-pressed="true"] {
+  border-color: var(--chart-grid);
+  background: var(--demo-surface, #f3f2ed);
+}
+
+.recharts-source-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.recharts-selection-status {
+  margin: 12px 0 0;
+  color: var(--chart-muted);
+  font-size: 12px;
+}
+
+.recharts-synchronized-stack {
+  display: grid;
+  gap: 28px;
+}
+
+.recharts-chart-caption {
+  margin-bottom: 8px;
+  color: var(--chart-muted);
+  font-size: 12px;
+}
+
+.recharts-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 600px) {
+  .recharts-example {
+    padding: 16px;
+  }
+  .recharts-example-chart {
+    height: 280px;
+  }
+  .recharts-example-chart-tall {
+    height: 340px;
+  }
+  .recharts-example-chart-small {
+    height: 190px;
+  }
+  .recharts-example-chart-medium {
+    height: 240px;
+  }
+  .recharts-pie-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .recharts-pie-chart {
+    height: 270px;
+  }
+}

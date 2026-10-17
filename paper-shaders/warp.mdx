@@ -1,0 +1,52 @@
+---
+title: "Warp"
+description: "Warped color fields with adjustable distortion and swirl."
+keywords: ["Paper Shaders", "Warp", "React"]
+---
+
+import { ShaderPlayground } from "/snippets/shader-playground.tsx";
+
+Package: [`@paper-design/shaders-react`](https://www.npmjs.com/package/@paper-design/shaders-react).
+
+<ShaderPlayground effect="warp" />
+
+## Try it
+
+Choose a palette, change scale, and pause the animation to inspect the result. Use the arrow keys on any focused slider for precise adjustments.
+
+## Code
+
+Initial configuration. The controls above change the preview.
+
+```jsx Warp.jsx
+import { Warp } from '@paper-design/shaders-react';
+
+export function ShaderExample() {
+  return (
+    <div style={{ width: '100%', height: 420 }}>
+      <Warp
+        width="100%"
+        height="100%"
+        maxPixelCount={2000000}
+        speed={0.65}
+        scale={1}
+        rotation={0}
+        colors={["#1b0a3d","#7251ff","#f25dbb","#dac9ff"]}
+        proportion={0.45}
+        softness={1}
+        distortion={0.25}
+        swirl={0.8}
+        swirlIterations={10}
+        shape="checks"
+        shapeScale={0.1}
+      />
+    </div>
+  );
+}
+```
+
+## Parameters
+
+`distortion` bends the source pattern and `swirl` adds rotation. The example uses the `checks` shape with ten swirl iterations.
+
+The canvas is WebGL; the controls are authored for this demo. See the [package reference](https://shaders.paper.design/warp).

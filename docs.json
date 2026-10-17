@@ -1,72 +1,119 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Mintlify Starter Kit",
+  "theme": "luma",
+  "name": "Mintlify",
   "colors": {
-    "primary": "#16A34A",
-    "light": "#07C983",
-    "dark": "#15803D"
+    "primary": "#3E6553",
+    "light": "#9EC8B1",
+    "dark": "#315441"
   },
-  "favicon": "/favicon.svg",
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
   "navigation": {
-    "pages": [
+    "tabs": [
       {
-        "group": "Getting Started",
-        "pages": [
-          "index",
-          "quickstart"
+        "tab": "Paper Shaders",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": [
+              "paper-shaders/mesh-gradient",
+              "paper-shaders/dot-orbit",
+              "paper-shaders/warp",
+              "paper-shaders/liquid-metal",
+              "paper-shaders/dithering",
+              "paper-shaders/grain-gradient"
+            ]
+          },
+          {
+            "group": "Setup",
+            "pages": ["how-it-works"]
+          }
+        ]
+      },
+      {
+        "tab": "Base UI",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": ["base-ui/dialog", "base-ui/combobox", "base-ui/menu", "base-ui/slider"]
+          }
+        ]
+      },
+      {
+        "tab": "Tiptap",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": [
+              "tiptap/editor",
+              "tiptap/slash-commands",
+              "tiptap/task-lists",
+              "tiptap/tables"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Recharts",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": [
+              "recharts/area-chart",
+              "recharts/composed-chart",
+              "recharts/pie-chart",
+              "recharts/synchronized-charts"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "React Flow",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": ["react-flow/workflow", "react-flow/custom-nodes", "react-flow/validation"]
+          }
+        ]
+      },
+      {
+        "tab": "Motion",
+        "groups": [
+          {
+            "group": "Examples",
+            "pages": ["motion/springs", "motion/layout", "motion/reorder"]
+          }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
+  "packages": {},
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:support@mintlify.com"
+        "label": "Documentation",
+        "href": "https://www.mintlify.com/docs"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.mintlify.com"
-    }
-  },
-  "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude",
-      "perplexity",
-      "mcp",
-      "cursor",
-      "vscode"
     ]
   },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify",
-      "linkedin": "https://linkedin.com/company/mintlify"
+  "background": {
+    "color": {
+      "light": "#FBFAF7",
+      "dark": "#151917"
+    }
+  },
+  "fonts": {
+    "family": "Inter"
+  },
+  "styling": {
+    "codeblocks": {
+      "theme": {
+        "light": "github-light",
+        "dark": "github-dark"
+      }
     }
   }
 }

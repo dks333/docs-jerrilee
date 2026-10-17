@@ -1,0 +1,154 @@
+.shader-example {
+  --example-background: var(--demo-surface);
+  --example-border: var(--demo-border);
+  --example-text: var(--demo-text);
+  --example-muted: var(--demo-muted);
+  --example-accent: var(--demo-accent);
+  color: var(--example-text);
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+}
+html.dark .shader-example {
+  color-scheme: dark;
+}
+
+.shader-example *,
+.shader-example *::before,
+.shader-example *::after {
+  box-sizing: border-box;
+}
+
+.shader-example button,
+.shader-example select,
+.shader-example input {
+  font-family: inherit;
+}
+
+.shader-example button,
+.shader-example select {
+  min-height: 30px;
+  border: 1px solid var(--example-border);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--example-text);
+  font-size: 12px;
+}
+
+.shader-example button {
+  padding: 4px 11px;
+  cursor: pointer;
+}
+.shader-example button:hover {
+  background: var(--example-background);
+}
+.shader-example button:focus-visible,
+.shader-example input:focus-visible,
+.shader-example select:focus-visible {
+  outline: 2px solid var(--example-accent);
+  outline-offset: 3px;
+}
+
+.shader-example-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 200px;
+  gap: 24px;
+  align-items: start;
+}
+.shader-example-preview {
+  height: 380px;
+  overflow: hidden;
+  border: 1px solid var(--example-border);
+  border-radius: 6px;
+}
+.shader-example-preview > div {
+  width: 100%;
+  height: 100%;
+}
+.shader-example-preview canvas {
+  display: block;
+  max-width: 100%;
+}
+.shader-example-settings {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.shader-example-settings legend {
+  padding: 0;
+  margin-bottom: 16px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.shader-palette-field {
+  display: grid;
+  grid-template-columns: 1fr 112px;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 12px;
+}
+.shader-palette-field select {
+  min-width: 0;
+  width: 100%;
+  padding: 4px 7px;
+}
+.shader-example-ranges {
+  display: grid;
+  gap: 14px;
+}
+.shader-control-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 12px;
+}
+.shader-control output {
+  color: var(--example-muted);
+  font-size: 11px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.shader-control input {
+  display: block;
+  width: 100%;
+  height: 15px;
+  margin: 0;
+  accent-color: var(--example-accent);
+  cursor: ew-resize;
+}
+.shader-example-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+@media (max-width: 1100px) {
+  .shader-example-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+  .shader-example-preview {
+    height: 340px;
+  }
+  .shader-example-settings {
+    width: 100%;
+  }
+  .shader-palette-field {
+    max-width: 240px;
+  }
+  .shader-example-ranges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shader-example-preview {
+    height: 280px;
+  }
+  .shader-example-ranges {
+    column-gap: 20px;
+  }
+}

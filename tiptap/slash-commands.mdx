@@ -1,0 +1,61 @@
+---
+title: "Slash commands"
+description: "Turn an empty line into a heading, list, task, quote, or code block."
+keywords: ["Tiptap", "slash commands", "blocks", "React"]
+---
+
+import { TiptapExample } from "/snippets/tiptap-example.tsx";
+
+Package: [`@tiptap/react`](https://www.npmjs.com/package/@tiptap/react).
+
+<TiptapExample variant="slash" />
+
+## Try it
+
+Click the empty line and type `/`. Keep typing to filter: try `/heading`, `/todo`, or `/quote`. Use the arrow keys and Enter to insert a block, or click a result.
+
+## Commands
+
+The menu calls Tiptap commands after removing the slash query. This small menu is custom to the example; it uses Tiptap's public extension and ProseMirror APIs.
+
+```tsx block-commands.ts
+import type { Editor } from "@tiptap/core";
+
+export function insertHeading(
+  editor: Editor,
+  range: { from: number; to: number },
+) {
+  editor
+    .chain()
+    .focus()
+    .deleteRange(range)
+    .setHeading({ level: 2 })
+    .run();
+}
+
+export function insertTaskList(
+  editor: Editor,
+  range: { from: number; to: number },
+) {
+  editor
+    .chain()
+    .focus()
+    .deleteRange(range)
+    .toggleTaskList()
+    .run();
+}
+```
+
+## Keyboard
+
+| Key | Action |
+| --- | --- |
+| `/` at the start of an empty paragraph | Open the menu |
+| Text after `/` | Filter block types |
+| `↑` / `↓` | Move through results |
+| `Enter` | Insert the selected block |
+| `Escape` | Close the menu and keep your text |
+
+An ordinary slash inside a sentence stays text. The menu does not open inside code blocks and closes when you leave the editor.
+
+[Command chaining](https://tiptap.dev/docs/editor/api/commands) · [Document editor](/tiptap/editor)

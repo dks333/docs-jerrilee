@@ -1,0 +1,59 @@
+---
+title: "Document editor"
+description: "A document canvas with headings, lists, and selection formatting."
+keywords: ["Tiptap", "Notion", "editor", "React"]
+---
+
+import { TiptapExample } from "/snippets/tiptap-example.tsx";
+
+Package: [`@tiptap/react`](https://www.npmjs.com/package/@tiptap/react).
+
+<TiptapExample />
+
+## Try it
+
+Edit the title or add a paragraph. Select a few words to open the floating formatting menu. Use the text menu to turn a paragraph into a heading.
+
+## Configuration
+
+Tiptap supplies the editor and document model. The document layout, toolbar, and block menu are custom React components in this example.
+
+```tsx document-editor.tsx
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+
+const content = "<h1>Weekend plans</h1><p>October 16–18 · a couple of days by the coast.</p>";
+
+export function DocumentEditor() {
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        heading: { levels: [1, 2, 3] },
+        link: { openOnClick: false },
+      }),
+    ],
+    content,
+    immediatelyRender: false,
+    shouldRerenderOnTransaction: false,
+  });
+
+  if (!editor) {
+    return <div className="tiptap" dangerouslySetInnerHTML={{ __html: content }} />;
+  }
+
+  return <EditorContent editor={editor} />;
+}
+```
+
+## Keyboard
+
+| Action | macOS | Windows / Linux |
+| --- | --- | --- |
+| Bold | `⌘ B` | `Ctrl B` |
+| Italic | `⌘ I` | `Ctrl I` |
+| Undo | `⌘ Z` | `Ctrl Z` |
+| Heading 2 | `⌘ Alt 2` | `Ctrl Alt 2` |
+
+The example keeps changes in memory. Refreshing restores the starting document.
+
+[Editor documentation](https://tiptap.dev/docs/editor/getting-started/install/react) · [Slash commands](/tiptap/slash-commands) · [Task lists](/tiptap/task-lists) · [Tables](/tiptap/tables)

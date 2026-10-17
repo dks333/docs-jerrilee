@@ -1,0 +1,20 @@
+pmOnFail: ignore
+overrides:
+  prosemirror-model: 1.25.12
+allowBuilds:
+  '@scarf/scarf': false
+  esbuild: true
+  keytar: true
+  sharp: true
+minimumReleaseAgeExclude:
+  - '@mintlify/cli@4.0.1653'
+  - '@mintlify/common@1.0.1250'
+  - '@mintlify/link-rot@3.0.1471'
+  - '@mintlify/models@0.0.374'
+  - '@mintlify/og@0.0.48'
+  - '@mintlify/package-builder@0.0.38'
+  - '@mintlify/prebuild@1.0.1415'
+  - '@mintlify/previewing@4.0.1491'
+  - '@mintlify/scraping@4.0.1123'
+  - '@mintlify/validation@0.1.918'
+  - mint@4.2.1050
