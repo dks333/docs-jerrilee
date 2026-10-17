@@ -157,37 +157,37 @@
   padding-inline-start: 0;
   list-style: none;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] {
+.tiptap-example .tiptap ul[data-type="taskList"] > li {
   display: flex;
   align-items: flex-start;
   gap: 8px;
   margin-block: 8px;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] > label {
+.tiptap-example .tiptap ul[data-type="taskList"] > li > label {
   flex: 0 0 auto;
   padding-block-start: 5px;
   user-select: none;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] > div {
+.tiptap-example .tiptap ul[data-type="taskList"] > li > div {
   flex: 1;
   min-width: 0;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] input {
+.tiptap-example .tiptap ul[data-type="taskList"] > li input {
   width: 16px;
   height: 16px;
   margin: 0;
   accent-color: var(--demo-solid);
   cursor: default;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] input:focus-visible {
+.tiptap-example .tiptap ul[data-type="taskList"] > li input:focus-visible {
   outline: 2px solid var(--demo-accent);
   outline-offset: 3px;
 }
-.tiptap-example .tiptap li[data-type="taskItem"][data-checked="true"] > div > p {
+.tiptap-example .tiptap ul[data-type="taskList"] > li[data-checked="true"] > div > p {
   color: var(--demo-muted);
   text-decoration: line-through;
 }
-.tiptap-example .tiptap li[data-type="taskItem"] ul[data-type="taskList"] {
+.tiptap-example .tiptap ul[data-type="taskList"] > li ul[data-type="taskList"] {
   margin-block: 8px 0;
 }
 .tiptap-example .tiptap table {
